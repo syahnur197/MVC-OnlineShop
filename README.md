@@ -10,12 +10,12 @@ Steps to install this website
 6. Open database.php file and set the hostname, username, and database name
 
 Website login credential
-*Admin*
-    **username:** syahnur197
+*Admin*  
+    **username:** syahnur197  
     **password:** 12345678
 
-*User* // don't even bother trying it
-    **username:** syahnur
+*User*  // don't even bother trying it  
+    **username:** syahnur  
     **password:** 12345678
 
 Working features
@@ -27,8 +27,10 @@ Working features
 6. Search products at shop homepage
 7. Filter products by category at shop homepage
 8. Form validation for registration
-9. Edit products
+9. Edit product page
 10. Password hashing
+11. Add product page
+12. Bounce unauthorised user from accessing AJAX functions
 
 Not yet implemented features
 1. Anything about cart
