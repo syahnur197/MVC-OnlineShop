@@ -26,6 +26,14 @@
     <!-- Custom scripts for this page-->
     <script src="<?php echo base_url();?>style/js/sb-admin-datatables.min.js"></script>
     <script src="<?php echo base_url();?>style/js/sb-admin-charts.min.js"></script>
+
+    <script type="text/javascript">
+      window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove(); 
+        });
+      }, 4000);
+    </script>
   </div>
 </body>
 
