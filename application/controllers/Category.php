@@ -13,6 +13,7 @@ class Category extends CI_Controller {
 	*/
 
 	public function getAllCategoriesWithSubCategories() {
+		$this->gate_model->ajax_gate();
 		header('Content-Type: application/json');
 		echo json_encode($this->category_model->getAllCategoriesWithSubCategories());
 	}
