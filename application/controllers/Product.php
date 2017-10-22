@@ -9,6 +9,9 @@ class Product extends CI_Controller {
 	}
 
 	public function getAllProduct() {
+		$this->gate_model->ajax_gate();
+		$search = $_GET['search'];
+		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
 		echo json_encode($this->db->get('product_table')->result());
 	}
