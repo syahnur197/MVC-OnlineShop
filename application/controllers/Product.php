@@ -14,13 +14,15 @@ class Product extends CI_Controller {
 	}
 
 	public function searchProduct() {
+		$this->gate_model->ajax_gate();
 		$search = $_GET['search'];
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
 		echo json_encode($this->product_model->searchProduct($search)->result());
 	}
-
+	
 	public function selectProductCategory() {
+		$this->gate_model->ajax_gate();
 		$categoryID = $_GET['categoryID'];
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
@@ -28,13 +30,13 @@ class Product extends CI_Controller {
 	}
 	
 	public function getProductDataJSON($productId) {
+		$this->gate_model->ajax_gate();
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
 		echo json_encode($this->product_model->getProduct($productId)->result());
 	}
 
 	public function update($product_id) {
-		// $product_id = $this->input->post('product_id');
 		$product_name = $data["product_name"] = $this->input->post('product_name');
 		$data["price"] = $this->input->post('product_price');
 		$data["description"] = $this->input->post('product_description');

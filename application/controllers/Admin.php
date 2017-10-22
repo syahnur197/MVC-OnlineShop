@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function index()	{
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
 		$this->load->view('layout/dashboard/sidebar');
 		$this->load->view('admin/dashboard');
@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function view_users() {
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$data["userlist"] = $this->admin_model->get_users();
 		$this->load->view('layout/dashboard/header', array('title' => 'View Users'));
 		$this->load->view('layout/dashboard/sidebar');
@@ -27,7 +27,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function view_product() {
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$data["productlist"] = $this->product_model->getAllProducts();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "View Products"));
@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function view_transactions() {
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$this->load->view("admin/transactions");
 	}
 	
@@ -61,22 +61,8 @@ class Admin extends CI_Controller {
 		echo json_encode($arr);
 	}
 	
-	/**
-	 Bounce users off the admin dashboard
-	 **/
-	public function adminGate() {
-		if ($this->session->userdata('usertype') != 'admin') {
-			$message = "<div class='alert alert-danger alert-dismissable my-4'>";
-			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-			$message .= "<strong>Warning!</strong> You are not the admin!";
-			$message .= "</div>";
-			$this->session->set_flashdata("success", $message );
-			redirect('shop');
-		}
-	}
-	
 	public function add_product() {
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$data["productlist"] = $this->product_model->getAllProducts();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "Add Product"));
@@ -86,7 +72,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function edit_product($product_id) {
-		$this->adminGate();
+		$this->gate_model->admin_gate();
 		$data['product'] = $this->product_model->getProduct($product_id)->row();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$data["product_id"] = $product_id;
@@ -95,5 +81,5 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/edit_product',$data);
 		$this->load->view('layout/dashboard/footer');
 	}
-
+	
 }
