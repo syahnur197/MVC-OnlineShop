@@ -16,8 +16,8 @@
 						<i class="fa fa-fw fa-users"></i>
 						<span class="nav-link-text">Users</span>
 					</a>
-					<ul class="sidenav-second-level collapse" id="collapseMulti2">
-						<li>
+					<ul class="sidenav-second-level collapse <?= $show_user; ?>" id="collapseMulti2">
+						<li class="<?= $manage_user_active; ?>">
 							<a href="<?= site_url('admin/view_users'); ?>">Manage</a>
 						</li>
 					</ul>
@@ -27,25 +27,25 @@
 						<i class="fa fa-fw fa-gift"></i>
 						<span class="nav-link-text">Products</span>
 					</a>
-					<ul class="sidenav-second-level collapse" id="collapseMulti3">
-						<li>
+					<ul class="sidenav-second-level collapse <?= $show_product; ?>" id="collapseMulti3">
+						<li class="<?= $manage_product_active; ?>">
 							<a href="<?= site_url('admin/view_product'); ?>">Manage</a>
 						</li>
-						<li>
+						<li class="<?= $add_product_active; ?>">
 							<a href="<?= site_url('admin/add_product'); ?>">Add</a>
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti4" data-parent="#exampleAccordion">
+					<a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseMulti4" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-tag"></i>
 						<span class="nav-link-text">Categories</span>
 					</a>
-					<ul class="sidenav-second-level collapse" id="collapseMulti4">
-						<li>
+					<ul class="sidenav-second-level collapse <?= $show_category; ?>" id="collapseMulti4">
+						<li class="<?= $manage_category_active; ?>">
 							<a href="<?= site_url('admin/view_category'); ?>">Manage</a>
 						</li>
-						<li>
+						<li class="<?= $add_category_active; ?>">
 							<a href="<?= site_url('admin/add_category'); ?>">Add</a>
 						</li>
 					</ul>
