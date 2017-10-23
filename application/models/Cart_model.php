@@ -172,7 +172,9 @@ class Cart_model extends CI_Model {
     }
 
     public function getCartDetail($cart_id) {
-        return $this->db->get_where("cart_table", array("cart_id" => $cart_id))->row();
+        return $this->db
+            ->join("user_table ut", "ut.user_id = ct.user_id")
+            ->get_where("cart_table ct", array("ct.cart_id" => $cart_id))->row();
     }
 }
 ?>

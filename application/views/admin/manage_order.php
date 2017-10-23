@@ -37,9 +37,9 @@
                   <tr align="center">
                     <td><?= $count++;?></td>
                     <td align="left"><?= $order->first_name . " " . $order->last_name; ?></td>
-                    <td>$ <?= $order->totalPrice; ?></td>
+                    <td>$ <?= number_format ( $order->totalPrice, 2  );  ?></td>
                     <td>datetime</td>
-                    <td><a href="#">View Cart</a></td>
+                    <td><a href="<?= site_url('admin/view_order/'.$order->cart_id)?>">View Order</a></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>

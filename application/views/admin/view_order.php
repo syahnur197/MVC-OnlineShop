@@ -13,35 +13,30 @@
           <i class="fa fa-table"></i> Cart</div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Customer Name</th>
-                  <th>Total Price</th>
-                  <th>Checkout Time</th>
-                  <th>Options</th>
+                  <th>Product Name</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Checkout ID</th>
-                  <th>Client</th>
-                  <th>Total Price</th>
-                  <th>Checkout Time</th>
-                  <th>Options</th>
-                </tr>
-              </tfoot>
               <tbody>
-                <?php $count = 1; foreach($carts as $cart): ?>
+                <?php $count = 1; foreach($products as $product): ?>
                   <tr align="center">
                     <td><?= $count++;?></td>
-                    <td align="left"><?= $cart->first_name . " " . $cart->last_name; ?></td>
-                    <td>$ <?= number_format ( $cart->totalPrice, 2  );  ?></td>
-                    <td>datetime</td>
-                    <td><a href="<?= site_url('admin/view_cart/'.$cart->cart_id)?>">View Cart</a></td>
+                    <td align="left"><?= $product->product_name; ?></td>
+                    <td>$ <?= $product->price; ?></td>
+                    <td><?= $product->quantity; ?></td>
+                    <td>$ <?= number_format ( $product->quantity * $product->price, 2  );  ?></td>
                   </tr>
                 <?php endforeach; ?>
+                <tr>
+                    <td colspan="4"  align="right"><strong>Total</strong></td>
+                    <td>$ <?= number_format ( $totalPrice, 2  );  ?></td>
+                  </tr>
               </tbody>
             </table>
           </div>
