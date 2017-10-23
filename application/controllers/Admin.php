@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 	
 	public function add_product() {
 		$this->gate_model->admin_gate();
-		$data["productlist"] = $this->product_model->getAllProducts();
+		// $data["productlist"] = $this->product_model->getAllProducts();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "Add Product"));
 		$this->load->view('layout/dashboard/sidebar');
@@ -79,6 +79,45 @@ class Admin extends CI_Controller {
 		$this->load->view('layout/dashboard/header', array("title" => "Edit Product"));
 		$this->load->view('layout/dashboard/sidebar');
 		$this->load->view('admin/edit_product',$data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function view_category() {
+		$this->gate_model->admin_gate();
+		$data["subcategorylist"] = $this->category_model->getAllSubCategories()->result();
+		foreach($data["subcategorylist"] as $d) {
+			if ($d->parent_category_id == 0) {
+				$d->parent_category_name = "No Parent";
+			}
+		}
+		// print_r($data);
+		$this->load->view('layout/dashboard/header', array("title" => "View Categories"));
+		$this->load->view('layout/dashboard/sidebar');
+		$this->load->view('admin/view_category',$data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function manage_category($category_id) {
+		$this->gate_model->admin_gate();
+		$data["category"] = $this->category_model->getCategoryData($category_id);
+		$data["parent_categories"] = $this->category_model->getAllParentCategories()->result();
+		$data["category_id"] = $category_id;
+		$data["productlist"] = $this->product_model->getCategoryProduct($category_id);
+		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
+		$this->load->view('layout/dashboard/header', array("title" => "Manage Categories"));
+		$this->load->view('layout/dashboard/sidebar');
+		$this->load->view('admin/manage_category',$data);
+		$this->load->view('layout/dashboard/footer');
+	}	
+	
+	public function add_category() {
+		$this->gate_model->admin_gate();
+		// $data["productlist"] = $this->product_model->getAllProducts();
+		$data["parent_categories"] = $this->category_model->getAllParentCategories()->result();
+		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
+		$this->load->view('layout/dashboard/header', array("title" => "Add Category"));
+		$this->load->view('layout/dashboard/sidebar');
+		$this->load->view('admin/add_category',$data);
 		$this->load->view('layout/dashboard/footer');
 	}
 	

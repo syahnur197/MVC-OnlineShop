@@ -6,12 +6,52 @@
       <li class="breadcrumb-item">
         <a href="<?= site_url('admin');?>">Dashboard</a>
       </li>
-      <li class="breadcrumb-item active">Product Listing</li>
+      <li class="breadcrumb-item">
+        <a href="<?= site_url('admin/view_category');?>">Category Listing</a>
+      </li>
+      <li class="breadcrumb-item active">Manage Category</li>
     </ol>
-    <!-- View Product DataTables Card-->
+    <!-- Example DataTables Card-->
+    <?= form_open('category/update/'.$category_id, array('class' => 'form-horizontal')) ?>
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table"></i> Product List </div>
+        Edit Category 
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="control-label">Category Name</label>
+          <div>
+            <input id="category_name" type="text" class="form-control" name="category_name" value="<?= $category->category_name; ?>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Parent Category</label>
+          <div>
+            <select id="parent_category_id" type="text" class="form-control" name="parent_category_id">
+              <option value="0" <?php if ($category->parent_category_id == 0){echo "selected";}?>>No Parent</option>
+              <?php 
+                foreach($parent_categories as $cat):
+              ?>
+                <option value="<?= $cat->category_id?>" <?php if ($cat->category_id == $category->parent_category_id){echo "selected";}?>>
+                  <?= $cat->category_name; ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Update" Class="btn btn-primary form-control">
+        </div>
+      </div>
+    </div>
+    <?= form_close(); ?>
+
+    
+    <!-- View Product Card-->
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fa fa-table"></i> <?= $category->category_name; ?> List </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -72,3 +112,6 @@
   <!-- /.container-fluid-->
   <!-- /.content-wrapper-->
 </div>
+
+
+

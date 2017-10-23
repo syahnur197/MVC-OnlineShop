@@ -42,11 +42,11 @@ class Product_model extends CI_Model {
     **/
 
 	public function getCategoryProduct($category_id = "") {
-		return $this->db->get_where(PRODUCT, array("category_id" => $category_id));
+		return $this->db->join(CATEGORY, "catt.category_id = pt.category_id")->get_where(PRODUCT, array("pt.category_id" => $category_id));
 	}
 
 	/**
-        Get data of product in a category
+        Get data of active product in a category
 
         @param int $category_id (DEFAULT = "")
 

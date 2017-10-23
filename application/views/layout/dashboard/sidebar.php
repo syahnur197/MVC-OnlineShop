@@ -36,6 +36,20 @@
 						</li>
 					</ul>
 				</li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti4" data-parent="#exampleAccordion">
+						<i class="fa fa-fw fa-tag"></i>
+						<span class="nav-link-text">Categories</span>
+					</a>
+					<ul class="sidenav-second-level collapse" id="collapseMulti4">
+						<li>
+							<a href="<?= site_url('admin/view_category'); ?>">Manage</a>
+						</li>
+						<li>
+							<a href="<?= site_url('admin/add_category'); ?>">Add</a>
+						</li>
+					</ul>
+				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
 					<a class="nav-link" href="<?= site_url('admin/view_transactions'); ?>">
 						<i class="fa fa-fw fa-area-chart"></i>
