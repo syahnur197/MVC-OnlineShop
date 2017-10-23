@@ -71,6 +71,12 @@ class Admin extends My_Controller {
 		$data['product'] = $this->product_model->getProduct($product_id)->row();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$data["product_id"] = $product_id;
+		$image_link = $this->product_model->getProductImageLink($product_id);
+		if (count($image_link) == 0){
+			$data["image_link"] = base_url('style/assets/images/no_image.png');
+		} else {
+			$data["image_link"] = $image_link;
+		}
 		$this->load->view('layout/dashboard/header', array("title" => "Edit Product"));
 		$this->loadSidebar("show_product", "manage_product_active");
 		$this->load->view('admin/edit_product',$data);

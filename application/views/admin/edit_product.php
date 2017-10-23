@@ -19,6 +19,15 @@
       </div>
       <div class="card-body">
         <div class="form-group">
+          <label class="control-label">Image</label>
+          <div class="row">
+            <div class="col-md-4">
+              <img src="<?= base_url($image_link); ?>" id="product_image" name="product_image" class="img-thumbnail">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="control-label">Product Name</label>
           <div>
             <input id="product_name" type="text" class="form-control" name="product_name" value="<?= $product->product_name; ?>">

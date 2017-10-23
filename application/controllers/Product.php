@@ -72,16 +72,18 @@ class Product extends My_Controller {
 	public function add() {
 		$this->form_validation->set_rules(
 			'product_name', 'Product Name',
-			'required|min_length[10]|alpha_numeric',
+			'required|min_length[10]',
 			array(
-				'required' => '<div class="alert alert-danger">You have not provided %s.</div>'
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>'
 			)
 		);
 
 		$this->form_validation->set_rules(
 			'product_price', 'Product Price', 'required|decimal', 
 			array(
-				'required' => '<div class="alert alert-danger">You have not provided %s.</div>'
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'decimal' => '<div class="alert alert-danger">The {field} must contain decimal number.</div>'
 			)
 		);
 
@@ -135,10 +137,9 @@ class Product extends My_Controller {
 				$this->loadSidebar("show_product", "add_product_active");
 				$this->load->view('admin/add_product',$data);
 				$this->load->view('layout/dashboard/footer');
-			}
-			else {
+			} else {
 				$file = $this->upload->data();
-				$image_link = $file['full_path'];
+				$image_link = "uploads/".$file['file_name'];
 				$insert = $this->product_model->addProduct($data, $image_link);
 				if ($insert) {
 					$message = "<div class='alert alert-success alert-dismissable'>";
