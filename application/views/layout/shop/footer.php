@@ -51,7 +51,7 @@
 			$(document).ready(function(){
 				$("#search").keyup(function() {
 					var search = $("#search").val();
-					$.get("<?php echo base_url(); ?>index.php/Product/searchProduct", { 'search' : search }, function(data) {
+					$.get("<?php echo base_url(); ?>index.php/Product/searchActiveProduct", { 'search' : search }, function(data) {
 						var string = "<h4>Search result for "+search+"...</h4>";
 						string += "<div class='row'>";
 						for(var i = 0; i < data.length; i++) {

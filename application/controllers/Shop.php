@@ -10,7 +10,7 @@ class Shop extends CI_Controller {
 	public function index() {
 
 		$categoryData = $this->category_model->getAllCategoriesWithSubCategories();
-		$sixProducts = $this->product_model->getSixProducts()->result();
+		$sixProducts = $this->product_model->getActiveProduct();
 
 		$this->load->view('layout/shop/header');
 		$this->load->view('shop/home', array('categoryData' => $categoryData, 'sixProducts' => $sixProducts));

@@ -46,6 +46,18 @@ class Product_model extends CI_Model {
 	}
 
 	/**
+        Get data of product in a category
+
+        @param int $category_id (DEFAULT = "")
+
+        @return PHP Object of product data of the category
+    **/
+
+	public function getActiveCategoryProduct($category_id = "") {
+		return $this->db->get_where(PRODUCT, array("category_id" => $category_id, "active_flag" => 0));
+	}
+
+	/**
         Get data of seller's product
 
         @param int $seller (DEFAULT = "")
@@ -94,6 +106,18 @@ class Product_model extends CI_Model {
 	}
 
 	/**
+        Get data of searched product
+
+        @param String $search (DEFAULT = "")
+
+        @return PHP Object of product data
+    **/
+
+	public function searchActiveProduct($search = "") {
+		return $this->db->like('product_name', "$search")->get_where(PRODUCT, array("active_flag" => 0));
+	}
+
+	/**
         Get data of active product
 
         @param int $product_id (DEFAULT = "")
@@ -108,17 +132,24 @@ class Product_model extends CI_Model {
 	*/
 
 	/**
-        Ban product
+        deactivate product
 
         @param int $product_id (DEFAULT = "")
 
         @return void
 	**/
 
-	/* UNUSED 
-	public function banProduct($product_id) {
-		return $this->db->where('product_id', $product_id)->update(PRODUCT, array('ban_flag' => 1));
+	public function changeStatus($product_id, $active_flag) {
+		return $this->db->where('product_id', $product_id)->update(PRODUCT, array('active_flag' => $active_flag));
 	}
- 	*/
+
+	public function getProductName ($product_id) {
+		return $this->db->where('product_id', $product_id)->get('product_table')->row()->product_name;
+	}
+
+	public function getActiveProduct() {
+		return $this->db->get_where('product_table', array('active_flag' => 0))->result();
+	}
+ 	
 }
 ?>

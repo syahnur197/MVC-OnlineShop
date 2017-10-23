@@ -47,7 +47,20 @@
                     <td><?= $pl->category_name ?></td>
                     <!-- <td><?php $date = new DateTime($pl->add_time); echo $date->format('d M Y'); ?></td> -->
                     <!-- <td><a data-toggle='modal' data-target='#editProductModal' href='#' onclick="passData(<?= $pl->product_id?>)">Edit</a></td> -->
-                    <td><a href='<?= site_url('admin/edit_product/'.$pl->product_id)?>'>Edit</a></td>
+                    <td>
+                      <a href='<?= site_url('admin/edit_product/'.$pl->product_id)?>'>
+                        <button class="btn btn-primary" style="width:100%">Edit</button>
+                      </a>
+                      <?php if($pl->active_flag == 0): ?>
+                        <a href='<?= site_url('product/changeActiveStatus/'.$pl->product_id).'/1'?>'>
+                          <button class="btn btn-danger" style="width:100%" >Deactivate</button>
+                        </a>
+                      <?php elseif($pl->active_flag == 1): ?>
+                        <a href='<?= site_url('product/changeActiveStatus/'.$pl->product_id).'/0'?>'>
+                          <button class="btn btn-success" style="width:100%" >Re-activate</button>
+                        </a>
+                      <?php endif; ?>
+                    </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -60,6 +73,11 @@
   <!-- /.container-fluid-->
   <!-- /.content-wrapper-->
 </div>
-
-
-
+<!-- 
+<script>
+  function changeStatus(product_id, active_flag) {
+    $.get("<?= site_url('product/changeActiveStatus/')+product_id+"/"+active_flag?>", {}, function(data) {
+      return true;
+    });
+  }
+</script> -->
