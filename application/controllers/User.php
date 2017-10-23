@@ -7,12 +7,14 @@
 		}
 
 		public function index() {
+			$this->gate_model->user_gate();
 			$this->load->view('layout/account/header');
 			$this->load->view('user/login');
 			$this->load->view('layout/account/footer');
 		}
-
+		
 		public function dashboard() {
+			$this->gate_model->user_gate();
 			$this->load->view('layout/account/header');
 			$this->load->view('user/dashboard');
 			$this->load->view('layout/account/footer');

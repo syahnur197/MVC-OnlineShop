@@ -7,12 +7,13 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$this->load->model('product_model');
 		$this->load->model('category_model');
+		$this->load->model('cart_model');
 	}
 
 	public function index()	{
 		$this->gate_model->admin_gate();
 		$this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
-		$this->load->view('layout/dashboard/sidebar');
+		$this->loadSidebar(null, null);
 		$this->load->view('admin/dashboard');
 		$this->load->view('layout/dashboard/footer');
 	}
@@ -21,16 +22,7 @@ class Admin extends CI_Controller {
 		$this->gate_model->admin_gate();
 		$data["userlist"] = $this->admin_model->get_users();
 		$this->load->view('layout/dashboard/header', array('title' => 'View Users'));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => "show",
-			"show_product" => null,
-			"show_category" => null,
-			"manage_user_active" => "active",
-			"manage_product_active" => null,
-			"manage_category_active" => null,
-			"add_product_active" => null,
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_user", "manage_user_active");
 		$this->load->view('admin/userlist', $data);
 		$this->load->view('layout/dashboard/footer');
 	}
@@ -40,23 +32,9 @@ class Admin extends CI_Controller {
 		$data["productlist"] = $this->product_model->getAllProducts();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "View Products"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => "show",
-			"show_category" => null,
-			"manage_user_active" => null,
-			"manage_product_active" => "active",
-			"manage_category_active" => null,
-			"add_product_active" => null,
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_product", "manage_product_active");
 		$this->load->view('admin/view_product',$data);
 		$this->load->view('layout/dashboard/footer');
-	}
-	
-	public function view_transactions() {
-		$this->gate_model->admin_gate();
-		$this->load->view("admin/transactions");
 	}
 	
 	public function ban_user() {
@@ -84,16 +62,7 @@ class Admin extends CI_Controller {
 		// $data["productlist"] = $this->product_model->getAllProducts();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "Add Product"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => "show",
-			"show_category" => null,
-			"manage_user_active" => null,
-			"manage_product_active" => null,
-			"manage_category_active" => null,
-			"add_product_active" => "active",
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_product", "add_product_active");
 		$this->load->view('admin/add_product',$data);
 		$this->load->view('layout/dashboard/footer');
 	}
@@ -104,16 +73,7 @@ class Admin extends CI_Controller {
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$data["product_id"] = $product_id;
 		$this->load->view('layout/dashboard/header', array("title" => "Edit Product"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => "show",
-			"show_category" => null,
-			"manage_user_active" => null,
-			"manage_product_active" => "active",
-			"manage_category_active" => null,
-			"add_product_active" => null,
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_product", "manage_product_active");
 		$this->load->view('admin/edit_product',$data);
 		$this->load->view('layout/dashboard/footer');
 	}
@@ -126,18 +86,8 @@ class Admin extends CI_Controller {
 				$d->parent_category_name = "No Parent";
 			}
 		}
-		// print_r($data);
 		$this->load->view('layout/dashboard/header', array("title" => "View Categories"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => null,
-			"show_category" => "show",
-			"manage_user_active" => null,
-			"manage_product_active" => null,
-			"manage_category_active" => "active",
-			"add_product_active" => null,
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_category", "manage_category_active");
 		$this->load->view('admin/view_category',$data);
 		$this->load->view('layout/dashboard/footer');
 	}
@@ -150,38 +100,99 @@ class Admin extends CI_Controller {
 		$data["productlist"] = $this->product_model->getCategoryProduct($category_id);
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "Manage Categories"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => null,
-			"show_category" => "show",
-			"manage_user_active" => null,
-			"manage_product_active" => null,
-			"manage_category_active" => "active",
-			"add_product_active" => null,
-			"add_category_active" => null
-		));
+		$this->loadSidebar("show_category", "manage_category_active");
 		$this->load->view('admin/manage_category',$data);
 		$this->load->view('layout/dashboard/footer');
 	}	
 	
 	public function add_category() {
 		$this->gate_model->admin_gate();
-		// $data["productlist"] = $this->product_model->getAllProducts();
 		$data["parent_categories"] = $this->category_model->getAllParentCategories()->result();
 		$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
 		$this->load->view('layout/dashboard/header', array("title" => "Add Category"));
-		$this->load->view('layout/dashboard/sidebar', array(
-			"show_user" => null,
-			"show_product" => null,
-			"show_category" => "show",
-			"manage_user_active" => null,
-			"manage_product_active" => null,
-			"manage_category_active" => null,
-			"add_product_active" => null,
-			"add_category_active" => "active"
-		));
+		$this->loadSidebar("show_category", "add_category_active");
 		$this->load->view('admin/add_category',$data);
 		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function manage_order() {
+		$this->gate_model->admin_gate();
+		
+		$orders = $this->cart_model->getAllOrders()->result();
+		foreach($orders as $order) {
+			$order->totalPrice = $this->cart_model->getTotalCartPrice($order->cart_id);
+		}
+		$data["orders"] = $orders;
+		$this->load->view('layout/dashboard/header', array("title" => "Manage Orders"));
+		$this->loadSidebar("show_order", "manage_order_active");
+		$this->load->view("admin/manage_order", $data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function manage_cart() {
+		$this->gate_model->admin_gate();
+		$carts = $this->cart_model->getAllActiveCarts()->result();
+		foreach($carts as $cart) {
+			$cart->totalPrice = $this->cart_model->getTotalCartPrice($cart->cart_id);
+		}
+		
+		$data["carts"] = $carts;
+		$this->load->view('layout/dashboard/header', array("title" => "Manage Cart"));
+		$this->loadSidebar("show_order", "manage_cart_active");
+		$this->load->view("admin/manage_cart", $data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function view_cart($cart_id) {
+		$this->gate_model->admin_gate();
+		$data['cart'] = $this->cart_model->getCartDetail($cart_id);
+		$data['products'] = $this->cart_model->getProductsInCart($cart_id);
+		$data['totalPrice'] = $this->cart_model->getTotalCartPrice($cart_id);
+		$this->load->view('layout/dashboard/header', array("title" => "View Carts"));
+		$this->loadSidebar("show_order", "manage_cart_active");
+		$this->load->view("admin/view_cart", $data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function loadSidebar($shownNav, $activedNav) {
+		$showUser = null;
+		$showProduct = null;
+		$showCategory = null;
+		$showOrder = null;
+		$manageUserActive = null;
+		$manageProductActive = null;
+		$manageCategoryActive = null;
+		$manageOrderActive = null;
+		$manageCartActive = null;
+		$addProductActive = null;
+		$addCategoryActive = null;
+		
+		if($shownNav == "show_user") {$showUser = "show";}
+		elseif($shownNav == "show_product") {$showProduct = "show";}
+		elseif($shownNav == "show_category") {$showCategory = "show";}
+		elseif($shownNav == "show_order") {$showOrder = "show";}
+		
+		if($activedNav == "manage_user_active") {$manageUserActive = "active"; }
+		if($activedNav == "manage_product_active") {$manageProductActive = "active"; }
+		if($activedNav == "manage_category_active") {$manageCategoryActive = "active"; }
+		if($activedNav == "manage_order_active") {$manageOrderActive = "active"; }
+		if($activedNav == "manage_cart_active") {$manageCartActive = "active"; }
+		if($activedNav == "add_product_active") {$addProductActive = "active"; }
+		if($activedNav == "add_category_active") {$addCategoryActive = "active"; }
+		$this->load->view('layout/dashboard/sidebar', array(
+			"show_user" => $showUser,
+			"show_product" => $showProduct,
+			"show_category" => $showCategory,
+			"show_order" => $showOrder,
+			"manage_user_active" => $manageUserActive,
+			"manage_product_active" => $manageProductActive,
+			"manage_category_active" => $manageCategoryActive,
+			"manage_order_active" => $manageOrderActive,
+			"manage_cart_active" => $manageCartActive,
+			"add_product_active" => $addProductActive,
+			"add_category_active" => $addCategoryActive
+		));
+
 	}
 	
 }

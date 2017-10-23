@@ -7,9 +7,8 @@
         </li>
         <li class="breadcrumb-item active">Tables</li>
       </ol>
-
-      <div class="alert alert-success" id="successAlert" style="display: none;">
-        <strong>Success!</strong> <span id="successMessage"></span>.
+      <div id="successAlert">
+        
       </div>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
@@ -126,7 +125,10 @@
   }
 
   function showSuccessAlert(message) {
-    $("#successMessage").html(message);
+    var string = "<div class='alert alert-success'>"
+          + "<strong>Success!</strong> "+message
+          +"</div>";
+    $("#successAlert").html(string);
     $("#successAlert").show();
     $('#successAlert').delay(3000).fadeOut('slow');
   }

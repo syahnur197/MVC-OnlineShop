@@ -1,9 +1,5 @@
 <?php
 
-define("CART", 'cart_table ct');
-define("PRODUCTCART", 'product_cart_table pct');
-define ("PRODUCT", 'product_table pt');
-
 class Cart_model extends CI_Model {
 
     /**
@@ -24,8 +20,32 @@ class Cart_model extends CI_Model {
         @return PHP Object of all cart
     **/
     
-    public function getAlLCarts() {
+    public function getAllCarts() {
         return $this->db->get(CART)->result();
+    }
+
+    /**
+        Get all active carts in db
+
+        @return PHP Object of all cart
+    **/
+    
+    public function getAllActiveCarts() {
+        return $this->db
+            ->join("user_table ut", "ut.user_id = ct.user_id")
+            ->get_where("cart_table ct", array("flag" => 0));
+    }
+
+    /**
+        Get all orders in db
+
+        @return PHP Object of all cart
+    **/
+    
+    public function getAllOrders() {
+        return $this->db
+            ->join("user_table ut", "ut.user_id = ct.user_id")
+            ->get_where("cart_table ct", array("flag" => 1));
     }
 
     /**
@@ -129,8 +149,8 @@ class Cart_model extends CI_Model {
 
     public function getProductsInCart($cart_id) {
         return $this->db
-            ->join(PRODUCT, "pt.product_id = pct.product_id")
-            ->get_where(PRODUCTCART, array("cart_id" => $cart_id))
+            ->join("product_table pt", "pt.product_id = pct.product_id")
+            ->get_where("product_cart_table pct", array("cart_id" => $cart_id))
             ->result();
     }
 
@@ -149,6 +169,10 @@ class Cart_model extends CI_Model {
            $totalPrice += ( $product->price * $product->quantity );
        }
        return $totalPrice;
+    }
+
+    public function getCartDetail($cart_id) {
+        return $this->db->get_where("cart_table", array("cart_id" => $cart_id))->row();
     }
 }
 ?>
