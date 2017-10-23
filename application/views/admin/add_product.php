@@ -33,11 +33,18 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label">Product Description</label>
-          <div>
-            <input id="product_description" type="text" class="form-control" name="product_description">
-          </div>
+        <label class="control-label">Product Short Description</label>
+        <div>
+          <input id="product_short_description" type="text" class="form-control" name="product_short_description">
         </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Product Long Description</label>
+        <div>
+          <textarea id="textarea" name="product_description"></textarea>
+        </div>
+      </div>
 
         <div class="form-group">
           <label class="control-label">Product Category</label>

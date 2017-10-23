@@ -46,11 +46,12 @@ class Product extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($this->product_model->getProduct($productId)->result());
 	}
-
+	
 	public function update($product_id) {
 		$product_name = $data["product_name"] = $this->input->post('product_name');
 		$data["price"] = $this->input->post('product_price');
 		$data["description"] = $this->input->post('product_description');
+		$data["short_desc"] = $this->input->post('product_short_description');
 		$data["category_id"] = $this->input->post('product_category');
 		$update = $this->product_model->updateProduct($product_id, $data);
 		if ($update) {
@@ -72,6 +73,7 @@ class Product extends CI_Controller {
 		$product_name = $data["product_name"] = $this->input->post('product_name');
 		$data["price"] = $this->input->post('product_price');
 		$data["description"] = $this->input->post('product_description');
+		$data["short_desc"] = $this->input->post('product_short_description');
 		$data["category_id"] = $this->input->post('product_category');
 		$data["seller_id"] = $this->session->userdata('userid');
 		$insert = $this->product_model->addProduct($data);

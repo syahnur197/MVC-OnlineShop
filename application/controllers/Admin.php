@@ -166,7 +166,7 @@ class Admin extends CI_Controller {
 		// header('Content-Type: application/json');
 		// echo json_encode($data);
 		$this->load->view('layout/dashboard/header', array("title" => "View Cart"));
-		$this->loadSidebar("show_order", "manage_cart_active");
+		$this->loadSidebar("show_order", "manage_order_active");
 		$this->load->view("admin/view_order", $data);
 		$this->load->view('layout/dashboard/footer');
 	}

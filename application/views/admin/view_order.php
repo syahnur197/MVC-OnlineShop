@@ -3,14 +3,17 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="<?= site_url('admin');?>">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Cart Listing</li>
+        <li class="breadcrumb-item">
+          <a href="<?= site_url('admin/manage_order');?>">Order Listing</a>
+        </li>
+        <li class="breadcrumb-item active">Order Listing</li>
       </ol>
       <!-- Active Cart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Cart</div>
+          <i class="fa fa-table"></i> Orders</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">

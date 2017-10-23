@@ -43,7 +43,7 @@
                     <td><?= $count++; ?></td>
                     <td><?= $pl->product_name ?></td>
                     <td>$ <?= $pl->price ?></td>
-                    <td><?= $pl->description ?></td>
+                    <td><?= $pl->short_desc; ?></td>
                     <td><?= $pl->category_name ?></td>
                     <!-- <td><?php $date = new DateTime($pl->add_time); echo $date->format('d M Y'); ?></td> -->
                     <!-- <td><a data-toggle='modal' data-target='#editProductModal' href='#' onclick="passData(<?= $pl->product_id?>)">Edit</a></td> -->

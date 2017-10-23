@@ -3,7 +3,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="<?= site_url('admin');?>">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Order Listing</li>
       </ol>
