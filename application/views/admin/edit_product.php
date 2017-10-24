@@ -9,15 +9,24 @@
       <li class="breadcrumb-item">
         <a href="<?= site_url('admin/view_product');?>">Product Listing</a>
       </li>
-      <li class="breadcrumb-item active">Add Product</li>
+      <li class="breadcrumb-item active">Edit Product</li>
     </ol>
     <!-- Example DataTables Card-->
     <?= form_open('product/update/'.$product_id, array('class' => 'form-horizontal')) ?>
     <div class="card mb-3">
       <div class="card-header">
-        Add Product 
+        Edit Product 
       </div>
       <div class="card-body">
+        <div class="form-group">
+          <label class="control-label">Image</label>
+          <div class="row">
+            <div class="col-md-4">
+              <img src="<?= base_url($image_link); ?>" id="product_image" name="product_image" class="img-thumbnail">
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="control-label">Product Name</label>
           <div>
@@ -33,9 +42,16 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label">Product Description</label>
+          <label class="control-label">Product Short Description</label>
           <div>
-            <input id="product_description" type="text" class="form-control" name="product_description" value="<?= $product->description; ?>">
+            <input id="product_short_description" type="text" class="form-control" name="product_short_description" value="<?= $product->short_desc; ?>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Product Long Description</label>
+          <div>
+            <textarea id="textarea" name="product_description"><?= $product->description; ?></textarea>
           </div>
         </div>
 

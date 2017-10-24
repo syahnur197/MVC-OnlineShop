@@ -16,6 +16,9 @@
   <link href="<?php echo base_url();?>style/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url();?>style/css/sb-admin.css" rel="stylesheet">
+  <!-- Tiny MCE -->
+  <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+  <!-- <script type="text/javascript" src="<?= base_url('style/tinymce/js/tinymce/jquery.tinymce.min.js')?>"></script> -->
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">

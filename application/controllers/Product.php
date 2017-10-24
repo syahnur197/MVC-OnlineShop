@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Product extends CI_Controller {
+class Product extends My_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -46,11 +46,12 @@ class Product extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($this->product_model->getProduct($productId)->result());
 	}
-
+	
 	public function update($product_id) {
 		$product_name = $data["product_name"] = $this->input->post('product_name');
 		$data["price"] = $this->input->post('product_price');
 		$data["description"] = $this->input->post('product_description');
+		$data["short_desc"] = $this->input->post('product_short_description');
 		$data["category_id"] = $this->input->post('product_category');
 		$update = $this->product_model->updateProduct($product_id, $data);
 		if ($update) {
@@ -69,25 +70,92 @@ class Product extends CI_Controller {
 	}
 	
 	public function add() {
-		$product_name = $data["product_name"] = $this->input->post('product_name');
-		$data["price"] = $this->input->post('product_price');
-		$data["description"] = $this->input->post('product_description');
-		$data["category_id"] = $this->input->post('product_category');
-		$data["seller_id"] = $this->session->userdata('userid');
-		$insert = $this->product_model->addProduct($data);
-		if ($insert) {
-			$message = "<div class='alert alert-success alert-dismissable'>";
-			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-			$message .= "<strong>Success!</strong> $product_name is added!";
-			$message .= "</div>";
+		$this->form_validation->set_rules(
+			'product_name', 'Product Name',
+			'required|min_length[10]',
+			array(
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>'
+			)
+		);
+
+		$this->form_validation->set_rules(
+			'product_price', 'Product Price', 'required|decimal', 
+			array(
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'decimal' => '<div class="alert alert-danger">The {field} must contain decimal number.</div>'
+			)
+		);
+
+		$this->form_validation->set_rules(
+			'product_description', 'Product Description', 'required|min_length[10]',
+			array(
+				'required' => '<div class="alert alert-danger">You must provide a %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>'
+				)
+		);
+	
+		$this->form_validation->set_rules(
+			'product_short_description', 'Product Short Description', 
+			'required|min_length[10]|max_length[50]',
+			array(
+				'required' => '<div class="alert alert-danger">You must provide a %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>',
+				'max_length' => '<div class="alert alert-danger">{field} must have at most {param} characters</div>'
+			)
+		);
+
+		if ($this->form_validation->run() == FALSE) {
+			$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
+			$this->load->view('layout/dashboard/header', array("title" => "Add Product"));
+			$this->loadSidebar("show_product", "add_product_active");
+			$this->load->view('admin/add_product',$data);
+			$this->load->view('layout/dashboard/footer');
 		} else {
-			$message = "<div class='alert alert-danger alert-dismissable'>";
-			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-			$message .= "<strong>Fail!</strong> Fail to add $product_name";
-			$message .= "</div>";
+			// Take product details
+			$product_name = $data["product_name"] = $this->input->post('product_name');
+			$data["price"] = $this->input->post('product_price');
+			$data["description"] = $this->input->post('product_description');
+			$data["short_desc"] = $this->input->post('product_short_description');
+			$data["category_id"] = $this->input->post('product_category');
+			$data["seller_id"] = $this->session->userdata('userid');
+
+			// upload images
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1000000;
+			$config['max_height']           = 1000000;
+
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload('image_link')) {
+				$error = $this->upload->display_errors();
+				$data["categories"] = $this->category_model->getAllCategoriesWithSubCategories();
+				$data["image_error"] = "<div class='alert alert-danger'>".$error."</div>";
+				$this->load->view('layout/dashboard/header', array("title" => "Add Product"));
+				$this->loadSidebar("show_product", "add_product_active");
+				$this->load->view('admin/add_product',$data);
+				$this->load->view('layout/dashboard/footer');
+			} else {
+				$file = $this->upload->data();
+				$image_link = "uploads/".$file['file_name'];
+				$insert = $this->product_model->addProduct($data, $image_link);
+				if ($insert) {
+					$message = "<div class='alert alert-success alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Success!</strong> $product_name is added!";
+					$message .= "</div>";
+				} else {
+					$message = "<div class='alert alert-danger alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Fail!</strong> Fail to add $product_name";
+					$message .= "</div>";
+				}
+				$this->session->set_flashdata('msg', $message); 
+				redirect('admin/view_product');
+			}
 		}
-		$this->session->set_flashdata('msg', $message); 
-		redirect('admin/view_product');
 	}
 	
 	public function changeActiveStatus($product_id, $active_flag) {

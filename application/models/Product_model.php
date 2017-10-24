@@ -77,8 +77,11 @@ class Product_model extends CI_Model {
         @return void
     **/
 
-	public function addProduct($array) {
-		return $this->db->insert("product_table", $array);
+	public function addProduct($array, $image_link) {
+		$insert = $this->db->insert("product_table", $array);
+		$product_id = $this->db->insert_id();
+		$this->db->insert('product_images', array('product_id' => $product_id, "image_link" => $image_link));
+		return $insert;
 	}
 
 	/**
@@ -149,6 +152,15 @@ class Product_model extends CI_Model {
 
 	public function getActiveProduct() {
 		return $this->db->get_where('product_table', array('active_flag' => 0))->result();
+	}
+
+	public function getProductImageLink($product_id) {
+		$image = $this->db->get_where('product_images', array('product_id' => $product_id))->row();
+		if (count($image) != 0) {
+			return $image->image_link;
+		} else {
+			return null;
+		}
 	}
  	
 }

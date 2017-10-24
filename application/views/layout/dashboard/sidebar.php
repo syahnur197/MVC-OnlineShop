@@ -11,7 +11,7 @@
 						<span class="nav-link-text">Go to Site</span>
 					</a>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
 					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-users"></i>
 						<span class="nav-link-text">Users</span>
@@ -22,7 +22,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
 					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-gift"></i>
 						<span class="nav-link-text">Products</span>
@@ -36,7 +36,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
 					<a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseMulti4" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-tag"></i>
 						<span class="nav-link-text">Categories</span>
@@ -50,10 +50,22 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders and Cart">
+					<a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseMulti5" data-parent="#exampleAccordion">
+						<i class="fa fa-fw fa-shopping-cart"></i>
+						<span class="nav-link-text">Orders and Cart</span>
+					</a>
+					<ul class="sidenav-second-level collapse <?= $show_order; ?>" id="collapseMulti5">
+						<li class="<?= $manage_order_active; ?>">
+							<a href="<?= site_url('admin/manage_order'); ?>">Manage Order</a>
+						</li>
+						<li class="<?= $manage_cart_active; ?>">
+							<a href="<?= site_url('admin/manage_cart'); ?>">Manage Cart</a>
+						</li>
+					</ul>
 					<a class="nav-link" href="<?= site_url('admin/view_transactions'); ?>">
 						<i class="fa fa-fw fa-area-chart"></i>
-						<span class="nav-link-text">Check Transactions</span>
+						<span class="nav-link-text">Orders</span>
 					</a>
 				</li>
 			</ul>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2017 at 11:06 PM
+-- Generation Time: Oct 23, 2017 at 05:27 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -65,8 +65,8 @@ CREATE TABLE `cart_table` (
 --
 
 INSERT INTO `cart_table` (`cart_id`, `user_id`, `date_buy`, `flag`) VALUES
-(1, 1, '2017-10-06 06:22:14', 0),
-(2, 1, '2017-10-06 03:16:00', 0);
+(1, 1, '2017-10-23 16:09:56', 1),
+(2, 4, '2017-10-23 14:23:30', 0);
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,9 @@ INSERT INTO `category_table` (`category_id`, `category_name`, `parent_category_i
 (9, 'Calculator', 3),
 (10, 'Multi-Vitamin', 4),
 (11, 'Ink-Printer', 4),
-(12, 'Protein', 4);
+(12, 'Protein', 4),
+(15, 'Kerusi', 0),
+(16, 'Sofa', 15);
 
 -- --------------------------------------------------------
 
@@ -201,22 +203,25 @@ CREATE TABLE `product_table` (
   `seller_id` int(11) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `short_desc` varchar(50) NOT NULL,
+  `description` text NOT NULL,
   `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ban_flag` tinyint(1) NOT NULL DEFAULT '0'
+  `active_flag` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product_table`
 --
 
-INSERT INTO `product_table` (`product_id`, `category_id`, `seller_id`, `product_name`, `price`, `description`, `add_time`, `ban_flag`) VALUES
-(1, 5, 3, 'Collared shirt', '10.00', 'White shirt from Korea', '2017-10-21 19:29:54', 0),
-(2, 5, 5, 'Prisoner suit', '17.50', 'Striped shirt made of leather.', '2017-10-21 19:42:13', 0),
-(3, 8, 5, 'Harry Potter and the Sorcerer\'s stone', '20.00', 'The first volume of Harry Potter.', '2017-10-07 04:52:06', 0),
-(4, 8, 5, 'Harry Potter and the Chamber of Secrets', '20.00', 'The third volume of Harry Potter.', '2017-10-08 04:52:06', 0),
-(5, 6, 4, 'Harry Potter\'s Jeans', '15.00', 'Jean made for Harry Potter', '2017-10-07 04:52:06', 0),
-(6, 5, 4, 'Harry Potter t-shirt', '20.00', 't-shirt that was worn by Harry Potter', '2017-10-08 04:52:06', 0);
+INSERT INTO `product_table` (`product_id`, `category_id`, `seller_id`, `product_name`, `price`, `short_desc`, `description`, `add_time`, `active_flag`) VALUES
+(1, 5, 3, 'Collared shirt', '25.00', 'White Shirt From Korea', '<ul>\r\n	<li>Cotton Shirt From Korea</li>\r\n	<li>Make of Silk</li>\r\n	<li>100% LEGIT</li>\r\n	<li>MAKE FROM COW SILK</li>\r\n	<li>Berdasarkan Sunnah</li>\r\n</ul>\r\n', '2017-10-23 15:18:20', 1),
+(2, 5, 5, 'Prisoner suit', '17.50', 'Striped shirt made of leather.', '', '2017-10-23 15:19:00', 0),
+(3, 8, 5, 'Harry Potter and the Sorcerer\'s stone', '20.00', 'The first volume of Harry Potter.', '', '2017-10-23 15:19:07', 0),
+(4, 8, 5, 'Harry Potter and the Chamber of Secrets', '20.00', 'The third volume of Harry Potter.', '', '2017-10-23 15:19:13', 0),
+(5, 6, 4, 'Harry Potter\'s Jeans', '15.00', 'Jean made for Harry Potter', '', '2017-10-23 15:19:21', 0),
+(6, 5, 4, 'Harry Potter t-shirt', '20.00', 't-shirt that was worn by Harry Potter', '', '2017-10-23 15:19:26', 0),
+(7, 16, 10, 'Sofa Ajaib', '50.00', 'Ini adalah sofa ajaib yang disayangi doraemon', '', '2017-10-23 15:19:33', 0),
+(8, 8, 10, 'Calendar Serbaguna', '7.00', 'Calendar Memutar Waktu', '<ul>\r\n	<li>7 Inchi Lebar</li>\r\n	<li>7 Inchi Tinggi</li>\r\n	<li>Sesuai untuk semua umur</li>\r\n	<li>Sesuai untuk penjaja yang suka berjaja</li>\r\n</ul>\r\n', '2017-10-23 15:20:38', 0);
 
 -- --------------------------------------------------------
 
@@ -311,7 +316,7 @@ CREATE TABLE `user_table` (
 
 INSERT INTO `user_table` (`user_id`, `first_name`, `last_name`, `company_name`, `username`, `email`, `password`, `user_type`, `ban_flag`) VALUES
 (1, 'John', 'Doe', '', 'johndoe', 'john@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'user', 0),
-(2, 'Jane', 'Doe', '', 'janedoe', 'jane@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'user', 1),
+(2, 'Jane', 'Doe', '', 'janedoe', 'jane@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'user', 0),
 (3, '', '', 'Activ Creation', 'activcreation', 'activ@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'user', 0),
 (4, 'Syahnur', 'Nizam', '', 'syahnur', 'syahnur@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'user', 0),
 (5, '', '', 'NewGatePlus', 'newgateplus', 'newgateplus@gmail.com', '$2y$10$AwmO51CDFLkGjZhpYYypN.p1w27yLuW2Sp0rXprORCjhlCs29MJo2', 'admin', 0),
@@ -456,7 +461,7 @@ ALTER TABLE `cart_table`
 -- AUTO_INCREMENT for table `category_table`
 --
 ALTER TABLE `category_table`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `history_table`
 --
@@ -481,7 +486,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `product_table`
 --
 ALTER TABLE `product_table`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `rating_table`
 --

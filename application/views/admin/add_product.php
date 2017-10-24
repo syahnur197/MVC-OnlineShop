@@ -12,30 +12,53 @@
       <li class="breadcrumb-item active">Add Product</li>
     </ol>
     <!-- Example DataTables Card-->
-    <?= form_open('product/add', array('class' => 'form-horizontal')) ?>
+    <?= form_open_multipart('product/add', array('class' => 'form-horizontal')) ?>
     <div class="card mb-3">
       <div class="card-header">
         Add Product 
       </div>
+
       <div class="card-body">
         <div class="form-group">
+          <?php if(isset($image_error)) {echo $image_error; }?>
+          <label class="control-label">Image</label>
+          <div class="row">
+            <div class="col-md-4">
+              <img src="<?= base_url('style/assets/images/no_image.png')?>" id="product_image" name="product_image" class="img-thumbnail">
+              <input type="file" id="my_file" onchange="readURL(this);" accept='image/*' name="image_link"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <?= form_error('product_name'); ?>
           <label class="control-label">Product Name</label>
           <div>
-            <input id="product_name" type="text" class="form-control" name="product_name">
+            <input id="product_name" type="text" class="form-control" name="product_name" value="<?php echo set_value('product_name'); ?>">
           </div>
         </div>
 
         <div class="form-group">
+          <?= form_error('product_price'); ?>
           <label class="control-label">Product Price</label>
           <div>
-            <input id="product_price" type="text" class="form-control" name="product_price">
+            <input id="product_price" type="text" class="form-control" name="product_price" value="<?php echo set_value('product_price'); ?>">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label">Product Description</label>
+          <?= form_error('product_short_description'); ?>
+          <label class="control-label">Product Short Description</label>
           <div>
-            <input id="product_description" type="text" class="form-control" name="product_description">
+            <input id="product_short_description" type="text" class="form-control" name="product_short_description" value="<?php echo set_value('product_short_description'); ?>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <?= form_error('product_description'); ?>
+          <label class="control-label">Product Long Description</label>
+          <div>
+            <textarea id="textarea" name="product_description"></textarea>
           </div>
         </div>
 
@@ -66,5 +89,19 @@
   <!-- /.content-wrapper-->
 </div>
 
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
+        reader.onload = function (e) {
+            $('#product_image')
+                .attr('src', e.target.result)
+                .width(300)
+                .height(300);
+        };
 
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
