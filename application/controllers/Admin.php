@@ -73,7 +73,7 @@ class Admin extends My_Controller {
 		$data["product_id"] = $product_id;
 		$image_link = $this->product_model->getProductImageLink($product_id);
 		if (count($image_link) == 0){
-			$data["image_link"] = base_url('style/assets/images/no_image.png');
+			$data["image_link"] = 'style/assets/images/no_image.png';
 		} else {
 			$data["image_link"] = $image_link;
 		}

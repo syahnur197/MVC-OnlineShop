@@ -48,25 +48,74 @@ class Product extends My_Controller {
 	}
 	
 	public function update($product_id) {
-		$product_name = $data["product_name"] = $this->input->post('product_name');
-		$data["price"] = $this->input->post('product_price');
-		$data["description"] = $this->input->post('product_description');
-		$data["short_desc"] = $this->input->post('product_short_description');
-		$data["category_id"] = $this->input->post('product_category');
-		$update = $this->product_model->updateProduct($product_id, $data);
-		if ($update) {
-			$message = "<div class='alert alert-success alert-dismissable'>";
-			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-			$message .= "<strong>Success!</strong> $product_name is updated!";
-			$message .= "</div>";
+		$this->form_validation->set_rules(
+			'product_name', 'Product Name',
+			'required|min_length[10]',
+			array(
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>'
+			)
+		);
+	
+		$this->form_validation->set_rules(
+			'product_price', 'Product Price', 'required|decimal', 
+			array(
+				'required' => '<div class="alert alert-danger">You have not provided %s.</div>',
+				'decimal' => '<div class="alert alert-danger">The {field} must contain decimal number.</div>'
+			)
+		);
+	
+		$this->form_validation->set_rules(
+			'product_description', 'Product Description', 'required|min_length[10]',
+			array(
+				'required' => '<div class="alert alert-danger">You must provide a %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>'
+				)
+		);
+	
+		$this->form_validation->set_rules(
+			'product_short_description', 'Product Short Description', 
+			'required|min_length[10]|max_length[50]',
+			array(
+				'required' => '<div class="alert alert-danger">You must provide a %s.</div>',
+				'min_length' => '<div class="alert alert-danger">{field} must have at least {param} characters</div>',
+				'max_length' => '<div class="alert alert-danger">{field} must have at most {param} characters</div>'
+			)
+		);
+
+		if ($this->form_validation->run() == FALSE) {
+			print_r(validation_errors());
 		} else {
-			$message = "<div class='alert alert-danger alert-dismissable'>";
-			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-			$message .= "<strong>Fail!</strong> $product_name is not updated!";
-			$message .= "</div>";
+			$product_name = $data["product_name"] = $this->input->post('product_name');
+			$data["price"] = $this->input->post('product_price');
+			$data["description"] = $this->input->post('product_description');
+			$data["short_desc"] = $this->input->post('product_short_description');
+			$data["category_id"] = $this->input->post('product_category');
+
+			// upload images
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1000000;
+			$config['max_height']           = 1000000;
+
+			$this->load->library('upload', $config);
+
+			$update = $this->product_model->updateProduct($product_id, $data);
+			if ($update) {
+				$message = "<div class='alert alert-success alert-dismissable'>";
+				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+				$message .= "<strong>Success!</strong> $product_name is updated!";
+				$message .= "</div>";
+			} else {
+				$message = "<div class='alert alert-danger alert-dismissable'>";
+				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+				$message .= "<strong>Fail!</strong> $product_name is not updated!";
+				$message .= "</div>";
+			}
+			$this->session->set_flashdata('msg', $message); 
+			redirect('admin/view_product');
 		}
-		$this->session->set_flashdata('msg', $message); 
-		redirect('admin/view_product');
 	}
 	
 	public function add() {

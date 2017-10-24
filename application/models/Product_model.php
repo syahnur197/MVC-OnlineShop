@@ -93,7 +93,8 @@ class Product_model extends CI_Model {
     **/
 
 	public function updateProduct($product_id, $array) {
-		return $this->db->where("product_id", $product_id)->update(PRODUCT, $array);
+		$update = $this->db->where("product_id", $product_id)->update(PRODUCT, $array);
+		return $update;
 	}
 
 	/**
@@ -160,6 +161,15 @@ class Product_model extends CI_Model {
 			return $image->image_link;
 		} else {
 			return null;
+		}
+	}
+	
+	public function getProductImageId($product_id) {
+		$image = $this->db->get_where('product_images', array('product_id' => $product_id))->row();
+		if (count($image) != 0) {
+			return $image->product_images_id;
+		} else {
+			return false;
 		}
 	}
  	

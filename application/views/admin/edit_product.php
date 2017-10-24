@@ -12,13 +12,14 @@
       <li class="breadcrumb-item active">Edit Product</li>
     </ol>
     <!-- Example DataTables Card-->
-    <?= form_open('product/update/'.$product_id, array('class' => 'form-horizontal')) ?>
+    <?= form_open_multipart('product/update/'.$product_id, array('class' => 'form-horizontal')) ?>
     <div class="card mb-3">
       <div class="card-header">
         Edit Product 
       </div>
       <div class="card-body">
         <div class="form-group">
+          <?php if(isset($image_error)) {echo $image_error; }?>
           <label class="control-label">Image</label>
           <div class="row">
             <div class="col-md-4">
@@ -28,6 +29,7 @@
         </div>
 
         <div class="form-group">
+          <?= form_error('product_name'); ?>
           <label class="control-label">Product Name</label>
           <div>
             <input id="product_name" type="text" class="form-control" name="product_name" value="<?= $product->product_name; ?>">
@@ -35,6 +37,7 @@
         </div>
 
         <div class="form-group">
+          <?= form_error('product_price'); ?>
           <label class="control-label">Product Price</label>
           <div>
             <input id="product_price" type="text" class="form-control" name="product_price" value="<?= $product->price; ?>">
@@ -42,6 +45,7 @@
         </div>
 
         <div class="form-group">
+          <?= form_error('product_short_description'); ?>
           <label class="control-label">Product Short Description</label>
           <div>
             <input id="product_short_description" type="text" class="form-control" name="product_short_description" value="<?= $product->short_desc; ?>">
@@ -49,6 +53,7 @@
         </div>
 
         <div class="form-group">
+          <?= form_error('product_description'); ?>
           <label class="control-label">Product Long Description</label>
           <div>
             <textarea id="textarea" name="product_description"><?= $product->description; ?></textarea>
@@ -81,6 +86,23 @@
   <!-- /.container-fluid-->
   <!-- /.content-wrapper-->
 </div>
+
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#product_image')
+                .attr('src', e.target.result)
+                .width(300)
+                .height(300);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
 
 
 
