@@ -20,7 +20,7 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <?php include("sidebar.php"); ?>
+  <!-- <?php include("sidebar.php"); ?> -->
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
