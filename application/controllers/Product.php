@@ -101,7 +101,17 @@ class Product extends My_Controller {
 
 			$this->load->library('upload', $config);
 
-			$update = $this->product_model->updateProduct($product_id, $data);
+			$upload = $this->upload->do_upload('image_link');
+			if ( !$upload && !$this->product_model->getProductImageId($product_id)) {
+				$error = $this->upload->display_errors();
+				print_r($error);
+			} elseif(!$upload && count($this->product_model->getProductImageId($product_id)) > 0) {
+				$update = $this->product_model->updateProduct($product_id, $data);
+			} elseif ($upload) {
+				$file = $this->upload->data();
+				$image_link = "uploads/".$file['file_name'];
+				$update = $this->product_model->updateProductWithProductImage($product_id, $data, $image_link);
+			}
 			if ($update) {
 				$message = "<div class='alert alert-success alert-dismissable'>";
 				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";

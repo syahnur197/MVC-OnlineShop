@@ -92,9 +92,21 @@ class Product_model extends CI_Model {
         @return void
     **/
 
-	public function updateProduct($product_id, $array) {
+	public function updateProductWithProductImage($product_id, $array, $image_link) {
 		$update = $this->db->where("product_id", $product_id)->update(PRODUCT, $array);
+		$productImageId = $this->getProductImageId($product_id);
+		if (!$productImageId) {
+			$this->db->insert('product_images', array('product_id' => $product_id, "image_link" => $image_link));
+		} else {
+			$image_path = $_SERVER['DOCUMENT_ROOT'].'/codeigniter/'.$this->getProductImageLink($product_id);
+			unlink($image_path);
+			$this->db->where(array('product_id' => $product_id))->update('product_images', array("image_link" => $image_link));
+		}
 		return $update;
+	}
+	
+	public function updateProduct($product_id, $array) {
+		return $this->db->where("product_id", $product_id)->update(PRODUCT, $array);
 	}
 
 	/**

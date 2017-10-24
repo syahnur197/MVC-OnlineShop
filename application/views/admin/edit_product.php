@@ -24,6 +24,7 @@
           <div class="row">
             <div class="col-md-4">
               <img src="<?= base_url($image_link); ?>" id="product_image" name="product_image" class="img-thumbnail">
+              <input type="file" id="my_file" onchange="readURL(this);" accept='image/*' name="image_link"/>
             </div>
           </div>
         </div>
