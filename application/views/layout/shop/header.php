@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Shop Item - Start Bootstrap Template</title>
+		<title>eShop</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="<?php echo base_url();?>style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

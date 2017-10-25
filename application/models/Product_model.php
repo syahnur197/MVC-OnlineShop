@@ -30,7 +30,9 @@ class Product_model extends CI_Model {
     **/
 
 	public function getProduct($product_id = "") {
-		return $this->db->get_where(PRODUCT, array("product_id" => $product_id));
+		return $this->db
+			->join('product_images pi', 'pi.product_id = pt.product_id', 'left')
+			->get_where('product_table pt', array("pt.product_id" => $product_id));
 	}
 
 	/**

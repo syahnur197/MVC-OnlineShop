@@ -17,9 +17,10 @@ class Shop extends CI_Controller {
 		$this->load->view('layout/shop/footer');
 	}
 
-	public function product() {
+	public function product($product_id) {
+		$data['product'] = $this->product_model->getProduct($product_id)->row();
 		$this->load->view('layout/shop/header');
-		$this->load->view('shop/product_page');
+		$this->load->view('shop/product_page', $data);
 		$this->load->view('layout/shop/footer');
 	}
 

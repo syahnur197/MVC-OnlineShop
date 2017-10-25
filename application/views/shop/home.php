@@ -93,7 +93,7 @@
 									</a>
 									<div class="card-body">
 										<h5 class="card-title">
-											<a href="<?= base_url(); ?>index.php/Shop/product"><?= $product->product_name; ?></a>
+											<a href="<?= base_url(); ?>index.php/Shop/product/<?= $product->product_id; ?>"><?= $product->product_name; ?></a>
 										</h5>
 										<h6>
 											B$ <?= $product->price; ?>
