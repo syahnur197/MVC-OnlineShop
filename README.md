@@ -15,7 +15,7 @@ Steps to install this website
 * **username:** syahnur197  
 * **password:** 12345678
 
-### *User*  // don't even bother trying it  
+### *User*  
 * **username:** syahnur  
 * **password:** 12345678
 
