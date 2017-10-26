@@ -15,7 +15,7 @@ class Account_model extends CI_Model {
 			->limit(1)
 			->get_where(USER, array("username" => $data["username"]))
 			->row();
-		if (password_verify ( $data['password'], $query->password )) {
+		if (password_verify ( $data['password'], $query->password ) && $query->ban_flag == 0) {
 			$data = array ("username" => $query->username, "usertype" => $query->user_type, "userid" => $query->user_id);
 			$this->session->set_userdata($data);
 			return  $query->user_type;

@@ -8,14 +8,17 @@
 		}
 
 		public function index() {
+			$this->gate_model->user_gate();
 			$this->load->view('layout/account/header');
 			$this->load->view('user/login');
 			$this->load->view('layout/account/footer');
 		}
-
+		
 		public function dashboard() {
+
 			$this->load->view('layout/account/header', array('title' => 'User Dashboard'));
 			$this->load->view('layout/dashboard/usersidebar');
+			$this->gate_model->user_gate();
 			$this->load->view('user/dashboard');
 			$this->load->view('layout/account/footer');
 			$this->load->view('layout/dashboard/logout');
@@ -54,8 +57,8 @@
 			$data['oldpassword']	=	$this->input->post('oldpassword');
 			$data['newpassword']	=	$this->input->post('newpassword');
 			$data['renewpassword']	=	$this->input->post('renewpassword');
-
 			$this->user_model->change_userpassword($data);
 		}
+
 	}
 ?>

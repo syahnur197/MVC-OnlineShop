@@ -102,7 +102,7 @@ class Account extends CI_Controller {
 		if ($result == "user") {
 			$this->session->set_flashdata('success', '<div class="alert alert-primary" style="margin-top:5px" role="alert">
   				You have successfully logged in as <span href="#" class="alert-link">'.$username.'</span>. Happy browsing.</div>'); 
-			redirect('user/dashboard');
+			redirect('shop');
 		} else if ($result == "admin") {
 			$this->session->set_flashdata('success', '<div class="alert alert-primary mt-4" role="alert">
   				You have successfully logged in as <span href="#" class="alert-link">'.$username.'</span>. You are the Admin.</div>'); 

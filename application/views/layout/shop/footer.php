@@ -7,7 +7,7 @@
 			<!-- /.container -->
 		</footer>
 
-		<?php include ('logout.php')?>
+		<?php include ('logout.php') ?>
 
 		<!-- Bootstrap core JavaScript -->
 		<script src="<?php echo base_url();?>style/vendor/jquery/jquery.min.js"></script>
@@ -83,6 +83,15 @@
 				});
 			});
 		</script>
+
+		<script type="text/javascript">
+	//set timer for alert messages
+		window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
 
 	</body>
 
