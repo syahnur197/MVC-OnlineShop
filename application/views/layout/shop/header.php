@@ -66,18 +66,18 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active">
+						<li class="nav-item <?= $home; ?>">
 							<a class="nav-link" href="<?= site_url('shop'); ?>">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item <?= $about; ?>">
 							<a class="nav-link" href="<?= site_url('shop/about');?>">About</a>
 						</li>
 						<!-- <li class="nav-item">
 							<a class="nav-link" href="#">Services</a>
 						</li> -->
-						<li class="nav-item">
+						<li class="nav-item <?= $contact; ?>">
 							<a class="nav-link" href="<?= site_url('shop/contact');?>">Contact</a>
 						</li>
 						<li class="nav-item">
