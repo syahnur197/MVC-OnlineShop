@@ -17,6 +17,9 @@
 		<!-- Custom styles for this template -->
 		<link href="<?php echo base_url();?>style/css/shop.css" rel="stylesheet">
 
+		<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+   		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
 		<script> 
 	        // wait for the DOM to be loaded 
 			function addToCart(product_id) {
@@ -27,6 +30,7 @@
 						$("#alert_modal").modal("show");
 						$("#modal_body").html("Please enter the quantity");
 						$("#modal_title").html("Warning");
+						$("#modal_footer").html("<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>");
 
 				} else {
 					$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":quantity, "product_id":product_id},
@@ -34,6 +38,13 @@
 							$("#alert_modal").modal("show");
 							$("#modal_body").html(data.message);
 							$("#modal_title").html(data.title);
+							if (data.success == true) {
+								var footer = "<button type='button' class='btn btn-success' data-dismiss='modal'>Checkout</button>";
+								footer += "<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>";
+							} else {
+								var footer = "<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>";
+							}
+							$("#modal_footer").html(footer);
 						}
 					)
 				}
@@ -49,23 +60,23 @@
 		<!-- Navigation -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">
-				<a class="navbar-brand" href="<?= base_url();?>index.php/Shop">eShop</a>
+				<a class="navbar-brand" href="<?= site_url('shop'); ?>">eShop</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Home
+							<a class="nav-link" href="<?= site_url('shop'); ?>">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">About</a>
+							<a class="nav-link" href="<?= site_url('shop/about');?>">About</a>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a class="nav-link" href="#">Services</a>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a class="nav-link" href="#">Contact</a>
 						</li>

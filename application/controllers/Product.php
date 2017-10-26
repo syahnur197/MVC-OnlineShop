@@ -83,7 +83,9 @@ class Product extends My_Controller {
 		);
 
 		if ($this->form_validation->run() == FALSE) {
-			print_r(validation_errors());
+			// print_r(validation_errors());
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('admin/edit_product/'.$product_id);
 		} else {
 			$product_name = $data["product_name"] = $this->input->post('product_name');
 			$data["price"] = $this->input->post('product_price');
@@ -103,7 +105,13 @@ class Product extends My_Controller {
 			$upload = $this->upload->do_upload('image_link');
 			if ( !$upload && !$this->product_model->getProductImageId($product_id)) {
 				$error = $this->upload->display_errors();
-				print_r($error);
+				$message = "<div class='alert alert-danger alert-dismissable'>";
+				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+				$message .= "<strong>Fail!</strong> $error";
+				$message .= "</div>";
+				// print_r($error);
+				$this->session->set_flashdata('errors', $message);
+				redirect('admin/edit_product/'.$product_id);
 			} elseif(!$upload && count($this->product_model->getProductImageId($product_id)) > 0) {
 				$update = $this->product_model->updateProduct($product_id, $data);
 				if ($update) {

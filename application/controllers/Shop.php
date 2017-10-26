@@ -23,6 +23,12 @@ class Shop extends CI_Controller {
 		$this->load->view('shop/product_page', $data);
 		$this->load->view('layout/shop/footer');
 	}
+	
+	public function about() {
+		$this->load->view('layout/shop/header');
+		$this->load->view('shop/about_page');
+		$this->load->view('layout/shop/footer');
+	}
 
 }
 ?>
