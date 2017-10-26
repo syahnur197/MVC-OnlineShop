@@ -1,8 +1,8 @@
-<body class="bg-dark">
+<body style="min-height: 350px; background:linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url(<?= base_url('style/assets/images/mall.jpeg')?>) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover;">
 	<div class="container">
 		<?php echo $this->session->flashdata("fail"); ?>
-		<div class="card card-login mx-auto mt-5">
-			<div class="card-header">Login</div>
+		<h1  class="text-center mt-5" style="color:white; font-family: 'Lobster', cursive">LOGIN</h1>
+		<div class="card card-login mx-auto">
 			<div class="card-body">
 				<?php echo form_open('account/loggingIn'); ?>
 					<div class="form-group">
