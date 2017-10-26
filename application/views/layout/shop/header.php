@@ -78,7 +78,7 @@
 							<a class="nav-link" href="#">Services</a>
 						</li> -->
 						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
+							<a class="nav-link" href="<?= site_url('shop/contact');?>">Contact</a>
 						</li>
 						<li class="nav-item">
 							<?php 	if ($this->session->userdata('usertype') == "admin") : ?>

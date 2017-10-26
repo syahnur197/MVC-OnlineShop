@@ -30,5 +30,11 @@ class Shop extends CI_Controller {
 		$this->load->view('layout/shop/footer');
 	}
 
+	public function contact() {
+		$this->load->view('layout/shop/header');
+		$this->load->view('shop/contact');
+		$this->load->view('layout/shop/footer');
+	}
+
 }
 ?>
