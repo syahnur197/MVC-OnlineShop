@@ -56,8 +56,9 @@ class Cart_model extends CI_Model {
         @return int $cart_id
     **/
 
-    public function getUserActiveCartID($user_id ="") {
-        return $this->db->get_where(CART, array("user_id" => $user_id, "flag" => 0))->row()->cart_id;
+    public function getUserActiveCartID() {
+        $user_id = $this->session->userdata('userid');
+        return $cart = $this->db->get_where('cart_table', array("user_id" => $user_id, "flag" => 0))->row()->cart_id;
     }
 
     /**
@@ -68,8 +69,8 @@ class Cart_model extends CI_Model {
         @return bool, TRUE if user has active cart
     **/
 
-    public function hasActiveCart($user_id) {
-        $cart = $this->getUserActiveCartID($user_id);
+    public function hasActiveCart() {
+        $cart = $this->getUserActiveCartID();
         if (count($cart) != 0) {
             return TRUE;
         } else {
@@ -85,8 +86,9 @@ class Cart_model extends CI_Model {
         @return int new $cart_id
     **/
 
-    public function addNewCart($user_id) {
-        if (!$this->hasActiveCart($user_id)) {
+    public function addNewCart() {
+        $user_id = $this->session->userdata('userid');
+        if (!$this->hasActiveCart($user_id)){
             $array = array("user_id" => $user_id);
             $this->db->insert(CART, $array);
             return $this->db->insert_id();
@@ -103,10 +105,10 @@ class Cart_model extends CI_Model {
         @return bool
     **/
 
-    public function buyCart($cart_id, $user_id) {
+    public function buyCart($cart_id) {
         $array = array("date_buy" => date("Y-m-d H:i:s", time()));
         $this->db->where("cart_id", $cart_id)->update(CART, $array);
-        return $this->deactivateAllUserCart($user_id);
+        return $this->deactivateAllUserCart($this->session->userdata('userid'));
     }
 
     /**
@@ -117,7 +119,7 @@ class Cart_model extends CI_Model {
         return bool
     **/
 
-    public function deactivateAllUserCart($user_id) {
+    private function deactivateAllUserCart($user_id) {
         $array = array("flag" => 1);
         return  $this->db->where(array("user_id" => $user_id))->update(CART, $array);
     }
@@ -136,7 +138,7 @@ class Cart_model extends CI_Model {
             "product_id" => $product_id,
             "quantity" => $quantity
         );
-        return $this->db->insert(PRODUCTCART, $array);
+        return $this->db->insert("product_cart_table", $array);
     }
 
     /**

@@ -2,6 +2,7 @@
 		<!-- Page Content -->
 		<div class="container">
 			<?php echo $this->session->flashdata("success"); ?>
+			<div id="alert_message"></div>
 			<div class="row">
 				<div class="col-lg-3">
 					<h3 class="my-4">Category</h3>
@@ -87,7 +88,9 @@
 							?>
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card h-100">
-									<a href="<?= base_url(); ?>index.php/Shop/product"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+									<a href="<?= base_url(); ?>index.php/Shop/product">
+										<img class="card-img-top" src="<?= base_url($product->image_link); ?>" alt="" height="300px">
+									</a>
 									<div class="card-body">
 										<h5 class="card-title">
 											<a href="<?= base_url(); ?>index.php/Shop/product"><?= $product->product_name; ?></a>
@@ -98,13 +101,16 @@
 										<p class="card-text"><?= $product->short_desc; ?></p>
 									</div>
 									<div class="card-footer">
+										<?= form_open(site_url('cart/addToCart'), array( "id" => "addToCart_$product->product_id")); ?>
 										<!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
-										<input type="number" name="quantity" class="form-control" placeholder="Quantity" id="quantity_<?= $product->product_id; ?>"/>
+										<input type="number" name="quantity" class="form-control" placeholder="Quantity" id="quantity_<?= $product->product_id; ?>" />
+										<input type="hidden" name="product_id" class="form-control" value="<?= $product->product_id; ?>"/>
 										<br>
-										<button class="pull-right btn btn-block btn-primary" type="button" onclick="addToCart(<?= $product->product_id; ?>);">
+										<button class="pull-right btn btn-block btn-primary" type="button" onclick="addToCart(<?= $product->product_id; ?>)">
 											<span class="fa fa-shopping-cart pull-left"></span>
 											Add to cart 		
 										</button>
+										<?= form_close(); ?>
 									</div>
 								</div>
 							</div>
@@ -123,9 +129,22 @@
 		</div>
 		<!-- /.container -->
 
-<script>
-	function addToCart(product_id) {
-		var quantity = $("#quantity_"+product_id).val();
-		alert(quantity);
-	}
-</script>
+<div class="modal fade" id="alert_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_title">></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal_body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,52 +23,55 @@
 						for(var i = 0; i < data.length; i++) {
 							string += "<div class='col-lg-4 col-md-6 mb-4'>"
 								+ "<div class='card h-100'>"
-									+ "<a href='<?= base_url(); ?>index.php/Shop/product'><img class='card-img-top' src='http://placehold.it/700x400' alt=''></a>"
-									+ "<div class='card-body'>"
+									+ "<a href='<?= base_url(); ?>index.php/Shop/product'>"
+										+ "<img class='card-img-top' src='<?= base_url();?>/"+data[i]['image_link']+"' alt='' height='300px'>"
+										+ "<div class='card-body'>"
 										+ "<h5 class='card-title'>"
-											+ "<a href='<?= base_url(); ?>index.php/Shop/product'>"+data[i]['product_name']+"</a>"
+										+ "<a href='<?= base_url(); ?>index.php/Shop/product'>"+data[i]['product_name']+"</a>"
 										+ "</h5>"
 										+ "<h6>"
-											+ "B$ "+data[i]['price']+""
+										+ "B$ "+data[i]['price']+""
 										+ "</h6>"
-										+ "<p class='card-text'>"+data[i]['description']+"</p>"
-									+ "</div>"
-									+ "<div class='card-footer'>"
-										+ "<small class='text-muted'>&#9733; &#9733; &#9733; &#9733; &#9734;</small>"
+										+ "<p class='card-text'>"+data[i]['short_desc']+"</p>"
+										+ "</div>"
+										+ "<div class='card-footer'>"
+										// + "<small class='text-muted'>&#9733; &#9733; &#9733; &#9733; &#9734;</small>"
 										+ "<button class='pull-right btn btn-block btn-primary' type='button'>"
-											+ "<span class='fa fa-shopping-cart pull-left'></span>"
-											+ "Add to cart"
+										+ "<span class='fa fa-shopping-cart pull-left'></span>"
+										+ "Add to cart"
 										+ "</button>"
-									+ "</div>"
-								+ "</div>"
-							+ "</div>";
-						}
-						string += "</div>";
-							$("#content").html(string);
-				}, 'json');
-			}
-
-			$(document).ready(function(){
-				$("#search").keyup(function() {
-					var search = $("#search").val();
-					$.get("<?php echo base_url(); ?>index.php/Product/searchActiveProduct", { 'search' : search }, function(data) {
-						var string = "<h4>Search result for "+search+"...</h4>";
-						string += "<div class='row'>";
-						for(var i = 0; i < data.length; i++) {
-							string += "<div class='col-lg-4 col-md-6 mb-4'>"
-								+ "<div class='card h-100'>"
-									+ "<a href='<?= base_url(); ?>index.php/Shop/product'><img class='card-img-top' src='http://placehold.it/700x400' alt=''></a>"
-									+ "<div class='card-body'>"
-										+ "<h5 class='card-title'>"
+										+ "</div>"
+										+ "</div>"
+										+ "</div>";
+									}
+									string += "</div>";
+									$("#content").html(string);
+								}, 'json');
+							}
+							
+							$(document).ready(function(){
+								$("#search").keyup(function() {
+									var search = $("#search").val();
+									$.get("<?php echo base_url(); ?>index.php/Product/searchActiveProduct", { 'search' : search }, function(data) {
+										var string = "<h4>Search result for "+search+"...</h4>";
+										string += "<div class='row'>";
+										for(var i = 0; i < data.length; i++) {
+											string += "<div class='col-lg-4 col-md-6 mb-4'>"
+											+ "<div class='card h-100'>"
+											+ "<a href='<?= base_url(); ?>index.php/Shop/product'>"
+												+ "<img class='card-img-top' src='<?= base_url();?>/"+data[i]['image_link']+"' alt='' height='300px'>"
+											+ "</a>"
+											+ "<div class='card-body'>"
+											+ "<h5 class='card-title'>"
 											+ "<a href='<?= base_url(); ?>index.php/Shop/product'>"+data[i]['product_name']+"</a>"
-										+ "</h5>"
-										+ "<h6>"
+											+ "</h5>"
+											+ "<h6>"
 											+ "B$ "+data[i]['price']+""
 										+ "</h6>"
-										+ "<p class='card-text'>"+data[i]['description']+"</p>"
+										+ "<p class='card-text'>"+data[i]['short_desc']+"</p>"
 									+ "</div>"
 									+ "<div class='card-footer'>"
-										+ "<small class='text-muted'>&#9733; &#9733; &#9733; &#9733; &#9734;</small>"
+										// + "<small class='text-muted'>&#9733; &#9733; &#9733; &#9733; &#9734;</small>"
 										+ "<button class='pull-right btn btn-block btn-primary' type='button'>"
 											+ "<span class='fa fa-shopping-cart pull-left'></span>"
 											+ "Add to cart"

@@ -10,7 +10,6 @@ class Product extends My_Controller {
 
 	public function getAllProduct() {
 		$this->gate_model->ajax_gate();
-		$search = $_GET['search'];
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
 		echo json_encode($this->db->get('product_table')->result());
@@ -94,7 +93,7 @@ class Product extends My_Controller {
 
 			// upload images
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'gif|jpg|png';
+			$config['allowed_types']        = 'gif|jpg|png|jpeg';
 			$config['max_size']             = 1000;
 			$config['max_width']            = 1000000;
 			$config['max_height']           = 1000000;
@@ -107,6 +106,7 @@ class Product extends My_Controller {
 				print_r($error);
 			} elseif(!$upload && count($this->product_model->getProductImageId($product_id)) > 0) {
 				$update = $this->product_model->updateProduct($product_id, $data);
+				print_r($update);
 			} elseif ($upload) {
 				$file = $this->upload->data();
 				$image_link = "uploads/".$file['file_name'];

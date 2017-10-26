@@ -54,7 +54,9 @@ class Product_model extends CI_Model {
     **/
 
 	public function getActiveCategoryProduct($category_id = "") {
-		return $this->db->get_where(PRODUCT, array("category_id" => $category_id, "active_flag" => 0));
+		return $this->db
+			->join('product_images pi', 'pi.product_id = pt.product_id')
+			->get_where(PRODUCT, array("category_id" => $category_id, "active_flag" => 0));
 	}
 
 	/**
@@ -130,7 +132,9 @@ class Product_model extends CI_Model {
     **/
 
 	public function searchActiveProduct($search = "") {
-		return $this->db->like('product_name', "$search")->get_where(PRODUCT, array("active_flag" => 0));
+		return $this->db
+			->join('product_images pi', 'pi.product_id = pt.product_id')
+			->like('product_name', "$search")->get_where(PRODUCT, array("active_flag" => 0));
 	}
 
 	/**
@@ -164,7 +168,9 @@ class Product_model extends CI_Model {
 	}
 
 	public function getActiveProduct() {
-		return $this->db->get_where('product_table', array('active_flag' => 0))->result();
+		return $this->db
+		->join('product_images pi', 'pi.product_id = pt.product_id')
+		->get_where('product_table pt', array('pt.active_flag' => 0))->result();
 	}
 
 	public function getProductImageLink($product_id) {

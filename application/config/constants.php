@@ -87,3 +87,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined("CATEGORY") or define("CATEGORY","category_table catt");
 defined("PRODUCT") or define("PRODUCT","product_table pt");
 defined("USER") or define("USER","user_table");
+defined("CART") or define("CART","cart_table");
+defined("PRODUCTCART") or define("PRODUCTCART","product_cart_table");
