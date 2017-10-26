@@ -42,20 +42,6 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#report" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Report</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="report">
-            <li>
-              <a href="<?php echo site_url("user/sold_products");?>">Products Sold</a>
-            </li>
-            <li>
-              <a href="<?php echo site_url("user/report");?>">Graphical Report</a>
-            </li>
-          </ul>
-        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
