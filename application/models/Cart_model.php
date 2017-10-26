@@ -10,8 +10,8 @@ class Cart_model extends CI_Model {
         @return PHP Object of all user cart 
     **/
 
-	public function getAllUserCart($user_id) {
-        return $this->db->get_where(CART, array( 'user_id' => $user_id ))->result();
+	public function getAllUserCart() {
+        return $this->db->get_where(CART, array( 'user_id' => $_SESSION['userid'] ))->result();
     } 
 
     /**

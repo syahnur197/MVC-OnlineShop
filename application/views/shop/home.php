@@ -95,11 +95,13 @@
 										<h6>
 											B$ <?= $product->price; ?>
 										</h6>
-										<p class="card-text"><?= $product->description; ?></p>
+										<p class="card-text"><?= $product->short_desc; ?></p>
 									</div>
 									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-										<button class="pull-right btn btn-block btn-primary" type="button">
+										<!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
+										<input type="number" name="quantity" class="form-control" placeholder="Quantity" id="quantity_<?= $product->product_id; ?>"/>
+										<br>
+										<button class="pull-right btn btn-block btn-primary" type="button" onclick="addToCart(<?= $product->product_id; ?>);">
 											<span class="fa fa-shopping-cart pull-left"></span>
 											Add to cart 		
 										</button>
@@ -121,3 +123,9 @@
 		</div>
 		<!-- /.container -->
 
+<script>
+	function addToCart(product_id) {
+		var quantity = $("#quantity_"+product_id).val();
+		alert(quantity);
+	}
+</script>

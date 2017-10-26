@@ -11,4 +11,8 @@ class CART extends CI_Controller {
     public function getTotalCartPrice($cart_id) {
         echo "$ ".$this->cart_model->getTotalCartPrice($cart_id);
     } 
+
+    public function addToCart() {
+        
+    }
 }
