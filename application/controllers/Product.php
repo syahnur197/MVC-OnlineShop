@@ -16,7 +16,7 @@ class Product extends My_Controller {
 	}
 
 	public function searchActiveProduct() {
-		$this->gate_model->ajax_gate();
+		// $this->gate_model->ajax_gate();
 		$search = $_GET['search'];
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
@@ -32,7 +32,7 @@ class Product extends My_Controller {
 	}
 	
 	public function selectProductCategory() {
-		$this->gate_model->ajax_gate();
+		// $this->gate_model->ajax_gate();
 		$categoryID = $_GET['categoryID'];
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
@@ -106,25 +106,37 @@ class Product extends My_Controller {
 				print_r($error);
 			} elseif(!$upload && count($this->product_model->getProductImageId($product_id)) > 0) {
 				$update = $this->product_model->updateProduct($product_id, $data);
-				print_r($update);
+				if ($update) {
+					$message = "<div class='alert alert-success alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Success!</strong> $product_name is updated!";
+					$message .= "</div>";
+				} else {
+					$message = "<div class='alert alert-danger alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Fail!</strong> $product_name is not updated!";
+					$message .= "</div>";
+				}
+				$this->session->set_flashdata('msg', $message); 
+				redirect('admin/view_product');
 			} elseif ($upload) {
 				$file = $this->upload->data();
 				$image_link = "uploads/".$file['file_name'];
 				$update = $this->product_model->updateProductWithProductImage($product_id, $data, $image_link);
+				if ($update) {
+					$message = "<div class='alert alert-success alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Success!</strong> $product_name is updated!";
+					$message .= "</div>";
+				} else {
+					$message = "<div class='alert alert-danger alert-dismissable'>";
+					$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+					$message .= "<strong>Fail!</strong> $product_name is not updated!";
+					$message .= "</div>";
+				}
+				$this->session->set_flashdata('msg', $message); 
+				redirect('admin/view_product');
 			}
-			if ($update) {
-				$message = "<div class='alert alert-success alert-dismissable'>";
-				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-				$message .= "<strong>Success!</strong> $product_name is updated!";
-				$message .= "</div>";
-			} else {
-				$message = "<div class='alert alert-danger alert-dismissable'>";
-				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
-				$message .= "<strong>Fail!</strong> $product_name is not updated!";
-				$message .= "</div>";
-			}
-			$this->session->set_flashdata('msg', $message); 
-			redirect('admin/view_product');
 		}
 	}
 	

@@ -17,23 +17,26 @@
 		<!-- Custom styles for this template -->
 		<link href="<?php echo base_url();?>style/css/shop.css" rel="stylesheet">
 
-		<!-- AJAX FORM -->
-		<!-- <script src="<?= base_url('style/js/jquery.form.min.js')?>"></script> -->
-		<script src="http://malsup.github.com/jquery.form.js"></script> 
-
 		<script> 
 	        // wait for the DOM to be loaded 
 			function addToCart(product_id) {
 				var quantity = "#quantity_"+product_id;
 				quantity = $(quantity).val();
-				$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":quantity, "product_id":product_id},
-					function(data) {
-						console.log(data);
+				// alert(quantity);
+				if (quantity == "") {
 						$("#alert_modal").modal("show");
-						$("#modal_body").html(data.message);
-						$("#modal_title").html(data.title);
-					}
-				)
+						$("#modal_body").html("Please enter the quantity");
+						$("#modal_title").html("Warning");
+
+				} else {
+					$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":quantity, "product_id":product_id},
+						function(data) {
+							$("#alert_modal").modal("show");
+							$("#modal_body").html(data.message);
+							$("#modal_title").html(data.title);
+						}
+					)
+				}
 			}
 		</script> 
 

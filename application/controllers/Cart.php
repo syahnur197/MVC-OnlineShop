@@ -14,7 +14,7 @@ class CART extends CI_Controller {
     } 
 
     public function addToCart() {
-        $this->gate_model->ajax_gate();
+        // $this->gate_model->ajax_gate();
         $product_id = $_POST['product_id'];
         $quantity = $_POST['quantity'];
         if ($this->session->userdata('usertype') != 'user' && $this->session->userdata('usertype') != 'admin') {
