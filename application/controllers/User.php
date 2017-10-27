@@ -4,6 +4,7 @@
 		public function __construct() {
 			parent::__construct();
 			$this->load->model('user_model');
+			$this->load->model('cart_model');
 			// $this->load->helper("form");
 		}
 
@@ -58,6 +59,22 @@
 			$data['newpassword']	=	$this->input->post('newpassword');
 			$data['renewpassword']	=	$this->input->post('renewpassword');
 			$this->user_model->change_userpassword($data);
+		}
+
+		public function your_cart() {
+			$cartExist = $this->cart_model->hasActiveCart();
+			if ($cartExist) {
+				$cartid = $this->cart_model->getUserActiveCartID();
+				$data['cartData'] = $this->cart_model->getProductsInCart($cartid);
+			} else {
+				$data['cartData'] = "Cart empty";
+			}
+
+			$this->load->view('layout/account/header', array('title' => 'User Dashboard'));
+			$this->load->view('layout/dashboard/usersidebar');
+			$this->load->view('user/manage_cart', $data);
+			$this->load->view('layout/account/footer');
+			$this->load->view('layout/dashboard/logout');
 		}
 
 	}
