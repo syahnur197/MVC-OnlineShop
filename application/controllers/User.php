@@ -19,7 +19,7 @@
 		public function dashboard() {
 			$this->gate_model->user_gate();
 			$this->load->view('layout/user/header', array('title' => 'User Dashboard'));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar(null, null);
 			$this->gate_model->user_gate();
 			$this->load->view('user/dashboard');
 			$this->load->view('layout/dashboard/logout');
@@ -30,7 +30,7 @@
 			$this->gate_model->user_gate();
 			$data['userData']= $this->user_model->get_userdetail()->row();
 			$this->load->view('layout/user/header', array('title' => 'Change Details'));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar('show_profile', 'change_detail_active');
 			$this->load->view('user/change_details', $data);
 			$this->load->view('layout/dashboard/logout');
 			$this->load->view('layout/user/footer');
@@ -52,7 +52,7 @@
 			$this->gate_model->user_gate();
 			$data['userData']	=	$this->user_model->get_userdetail()->row();
 			$this->load->view('layout/user/header', array('title' => 'Change Password'));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar('show_profile', 'change_password_active');
 			$this->load->view('user/change_password', $data);
 			$this->load->view('layout/dashboard/logout');
 			$this->load->view('layout/user/footer');
@@ -79,7 +79,7 @@
 			}
 			$data['exist'] = $cartExist;
 			$this->load->view('layout/user/header', array('title' => 'Your Cart'));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar('show_cart_order', 'your_cart_active');
 			$this->load->view('user/manage_cart', $data);
 			$this->load->view('layout/dashboard/logout');
 			$this->load->view('layout/user/cart_modal');
@@ -113,7 +113,7 @@
 			}
 	
 			$this->load->view('layout/user/header', array('title' => 'Checkout'));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar('show_cart_order', 'your_cart_active');
 			$this->load->view('user/checkout', $data);
 			$this->load->view('layout/dashboard/logout');
 			$this->load->view('layout/user/footer');
@@ -127,7 +127,7 @@
 			}
 			$data["orders"] = $orders;
 			$this->load->view('layout/user/header', array("title" => "Manage Orders"));
-			$this->load->view('layout/user/sidebar');
+			$this->loadUserSidebar('show_cart_order', 'your_order_active');
 			$this->load->view("user/manage_order", $data);
 			$this->load->view('layout/dashboard/logout');
 			$this->load->view('layout/user/footer');
@@ -147,7 +147,7 @@
 					$data['totalPrice'] += $cart->price * $cart->quantity;
 				}
 				$this->load->view('layout/user/header', array('title' => 'Your Cart'));
-				$this->load->view('layout/user/sidebar');
+				$this->loadUserSidebar('show_cart_order', 'your_order_active');
 				$this->load->view('user/view_order', $data);
 				$this->load->view('layout/dashboard/logout');
 				$this->load->view('layout/user/cart_modal');

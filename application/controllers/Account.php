@@ -100,13 +100,17 @@ class Account extends CI_Controller {
 			);
 		$result = $this->account_model->login($data);
 		if ($result == "user") {
-			$this->session->set_flashdata('success', '<div class="alert alert-primary" style="margin-top:5px" role="alert">
+			$this->session->set_flashdata('success', '<div class="alert alert-primary mt-4"role="alert">
   				You have successfully logged in as <span href="#" class="alert-link">'.$username.'</span>. Happy browsing.</div>'); 
 			redirect('shop');
 		} else if ($result == "admin") {
 			$this->session->set_flashdata('success', '<div class="alert alert-primary mt-4" role="alert">
   				You have successfully logged in as <span href="#" class="alert-link">'.$username.'</span>. You are the Admin.</div>'); 
 			redirect('Admin');
+		} else if ($result == "ban") {
+			$this->session->set_flashdata('success', '<div class="alert alert-danger mt-4" role="alert">
+  				You are banned from this website. Probably because you have been doing naughty stuff</div>'); 
+			redirect('shop');
 		} else {
 			$this->session->set_flashdata('fail', '<div class="alert alert-danger mt-4" role="alert">
   				Login failed.</div>'); 

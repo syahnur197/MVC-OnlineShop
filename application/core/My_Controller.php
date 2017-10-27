@@ -43,6 +43,34 @@ class My_Controller extends CI_Controller {
 			"add_product_active" => $addProductActive,
 			"add_category_active" => $addCategoryActive
 		));
+		
+	}
+	
+	public function loadUserSidebar($shownNav, $activedNav) {
+		$showProfile = null;
+		$showCartOrder = null;
+		
+		$changeDetailActive = null;
+		$changePasswordActive = null;
+		
+		$yourCartActive = null;
+		$yourOrderActive = null;
+		
+		if($shownNav == "show_profile") {$showProfile = "show";}
+		elseif($shownNav == "show_cart_order") {$showCartOrder = "show";}
+		
+		if($activedNav == "change_detail_active") {$changeDetailActive = "active"; }
+		if($activedNav == "change_password_active") {$changePasswordActive = "active"; }
+		if($activedNav == "your_cart_active") {$yourCartActive = "active"; }
+		if($activedNav == "your_order_active") {$yourOrderActive = "active"; }
 
-    }
+		$this->load->view('layout/user/sidebar', array(
+			"show_profile" => $showProfile,
+			"show_cart_order" => $showCartOrder,
+			"change_detail_active" => $changeDetailActive,
+			"change_password_active" => $changePasswordActive,
+			"your_cart_active" => $yourCartActive,
+			"your_order_active" => $yourOrderActive
+		));
+	}
 }
