@@ -178,5 +178,9 @@ class Cart_model extends CI_Model {
             ->join("user_table ut", "ut.user_id = ct.user_id")
             ->get_where("cart_table ct", array("ct.cart_id" => $cart_id))->row();
     }
+
+    public function removeFromCart($pcid) {
+        return $this->db->where('product_cart_id', $pcid)->delete(PRODUCTCART);
+    }
 }
 ?>

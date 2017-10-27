@@ -50,4 +50,14 @@ class CART extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($array);
     }
+
+    public function removeFromCart() {
+        $pcid = $this->input->post('productCartId');
+        $succ = $this->cart_model->removeFromCart($pcid);
+        if ($succ) $message = '<div class="alert alert-success" style="margin-top:10px" role="alert"> Item removed from your cart. </div>';
+        else $message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> Failed to remove item from your cart. </div>';       
+
+        $this->session->set_flashdata('msg', $message);
+        redirect('user/your_cart');
+    }
 }

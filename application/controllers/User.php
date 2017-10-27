@@ -66,8 +66,9 @@
 			if ($cartExist) {
 				$cartid = $this->cart_model->getUserActiveCartID();
 				$data['cartData'] = $this->cart_model->getProductsInCart($cartid);
+				$data['exist'] = true;
 			} else {
-				$data['cartData'] = "Cart empty";
+				$data['exist'] = false; 
 			}
 
 			$this->load->view('layout/account/header', array('title' => 'User Dashboard'));
@@ -75,6 +76,7 @@
 			$this->load->view('user/manage_cart', $data);
 			$this->load->view('layout/account/footer');
 			$this->load->view('layout/dashboard/logout');
+			$this->load->view('layout/dashboard/cart_modal');
 		}
 
 	}
