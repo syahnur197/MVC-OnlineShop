@@ -4,7 +4,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="<?= site_url('admin');?>">Dashboard</a>
+          <a href="<?= site_url('user/dashboard');?>">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Your cart</li>
       </ol>
