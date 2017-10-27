@@ -11,10 +11,11 @@
       <!-- Active Cart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Carts</div>
+          <i class="fa fa-shopping-cart"> </i> Your Cart</div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+              <tfoot><tr><td colspan=3></td><td colspan='2'>Total Price : </td></tr></tfoot>
               <tbody>
                 <?php 
                   if ($exist) :
@@ -25,10 +26,11 @@
                     <td rowspan=2><?= $count++;?></td>
                     <td rowspan=2>put image here</td>
                     <td rowspan=1 align="left" ><strong><em><?= $cart->product_name; ?></em></strong></td>
-                    <td rowspan=1 align="left" >Qty: <?=$cart->quantity;?></td>
+                    <td rowspan=1 align="left" >Qty : <?=$cart->quantity;?></td>
+                    <td rowspan=1 align="left" >Price : <?="$".$cart->price;?></td>
                     <td rowspan=2><a data-toggle="modal" data-target="#cartmodal" class="btn-sm btn-danger passID" data-id="<?= $cart->product_cart_id; ?>"> x </a></td>
                   </tr><tr>
-                    <td rowspan=1 colspan=2 align="left"><?= $cart->short_desc; ?></td>
+                    <td rowspan=1 colspan=3 align="left"><?= $cart->short_desc; ?></td>
                   </tr>
                 <?php
                   endforeach;
@@ -39,6 +41,7 @@
               </tbody>
             </table>
           </div>
+          <button class="btn btn-primary">Check Out</button>
         </div>
       </div>
     </div>
