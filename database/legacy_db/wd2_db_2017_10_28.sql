@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2017 at 06:56 PM
+-- Generation Time: Oct 23, 2017 at 05:27 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -42,7 +42,10 @@ CREATE TABLE `address_table` (
 --
 
 INSERT INTO `address_table` (`address_id`, `user_id`, `country`, `postcode`, `address`, `town`) VALUES
-(8, 4, 'Brunei Darussalam', 'BE3119', 'No 48', 'BSB');
+(1, 2, 'Brunei Darussalam', 'BG1234', 'Kg Selayun Sengkurong', 'Pekan Sengkurong'),
+(2, 2, 'Brunei Darussalam', 'BG2468', 'Kg Kulapis, Batong', ''),
+(3, 1, 'Malaysia', 'BG1357', 'Miri', ''),
+(4, 4, 'Brunei Darussalam', 'BG369', 'Kg Rimba', '');
 
 -- --------------------------------------------------------
 
@@ -62,8 +65,8 @@ CREATE TABLE `cart_table` (
 --
 
 INSERT INTO `cart_table` (`cart_id`, `user_id`, `date_buy`, `flag`) VALUES
-(9, 4, '2017-10-27 22:52:48', 1),
-(10, 2, '2017-10-28 00:08:42', 1);
+(1, 1, '2017-10-23 16:09:56', 1),
+(2, 4, '2017-10-23 14:23:30', 0);
 
 -- --------------------------------------------------------
 
@@ -95,9 +98,7 @@ INSERT INTO `category_table` (`category_id`, `category_name`, `parent_category_i
 (11, 'Ink-Printer', 4),
 (12, 'Protein', 4),
 (15, 'Kerusi', 0),
-(16, 'Sofa', 15),
-(17, 'Accessories', 0),
-(18, 'Bracelet', 17);
+(16, 'Sofa', 15);
 
 -- --------------------------------------------------------
 
@@ -175,18 +176,8 @@ CREATE TABLE `product_cart_table` (
 --
 
 INSERT INTO `product_cart_table` (`product_cart_id`, `cart_id`, `product_id`, `quantity`, `add_time`) VALUES
-(6, 9, 2, 10, '2017-10-26 01:53:01'),
-(8, 9, 2, 10, '2017-10-26 01:58:27'),
-(12, 9, 16, 10, '2017-10-25 21:54:50'),
-(14, 9, 4, 500, '2017-10-27 13:34:46'),
-(17, 9, 16, 1, '2017-10-27 13:35:34'),
-(18, 9, 4, 10, '2017-10-27 13:35:38'),
-(19, 9, 20, 30, '2017-10-27 13:36:12'),
-(20, 9, 14, 1, '2017-10-27 13:37:29'),
-(21, 9, 14, 1, '2017-10-27 13:38:16'),
-(34, 10, 14, 1, '2017-10-27 15:35:13'),
-(35, 10, 14, 1, '2017-10-27 15:45:10'),
-(36, 10, 14, 1, '2017-10-27 15:46:38');
+(1, 1, 1, 2, '2017-10-12 00:43:33'),
+(2, 1, 6, 10, '2017-10-12 00:43:33');
 
 -- --------------------------------------------------------
 
@@ -199,19 +190,6 @@ CREATE TABLE `product_images` (
   `product_id` int(11) NOT NULL,
   `image_link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `product_images`
---
-
-INSERT INTO `product_images` (`product_images_id`, `product_id`, `image_link`) VALUES
-(2, 14, 'uploads/Oracle_Campus_Analyic_Students_Financing_(1).png'),
-(4, 16, 'uploads/farmto_table2.png'),
-(7, 4, 'uploads/Harry_Potter_and_the_Philosophers_Stone_Book_Cover2.jpg'),
-(8, 19, 'uploads/qnwvxo1416925098679.jpg'),
-(13, 20, 'uploads/21272585_190708898136882_5711301978557311206_n.jpg'),
-(14, 1, 'uploads/collared_shirt.jpeg'),
-(15, 2, 'uploads/prisoner_suit.jpg');
 
 -- --------------------------------------------------------
 
@@ -236,18 +214,14 @@ CREATE TABLE `product_table` (
 --
 
 INSERT INTO `product_table` (`product_id`, `category_id`, `seller_id`, `product_name`, `price`, `short_desc`, `description`, `add_time`, `active_flag`) VALUES
-(1, 5, 3, 'Collared shirt', '25.00', 'White Shirt From Korea', '<ul>\r\n	<li>Cotton Shirt From Korea</li>\r\n	<li>Make of Silk</li>\r\n	<li>100% LEGIT</li>\r\n	<li>MAKE FROM COW SILK</li>\r\n	<li>Berdasarkan Sunnah</li>\r\n</ul>\r\n', '2017-10-26 03:00:36', 0),
-(2, 5, 5, 'Prisoner suit', '17.50', 'Striped shirt made of leather.', '<p>Striped shirt made of leather.</p>\r\n\r\n<p>Striped shirt made of leather.</p>\r\n\r\n<p>Striped shirt made of leather.</p>\r\n\r\n<p>Striped shirt made of leather.</p>\r\n\r\n<p>Striped shirt made of leather.</p>\r\n', '2017-10-24 00:53:20', 0),
-(3, 8, 5, 'Harry Potter and the Sorcerer\'s stone', '20.00', 'The first volume of Harry Potter.', '<p>The first volume of Harry Potter.</p>\r\n\r\n<p>The first volume of Harry Potter.</p>\r\n\r\n<p>The first volume of Harry Potter.</p>\r\n\r\n<p>The first volume of Harry Potter.</p>\r\n', '2017-10-24 00:32:46', 0),
-(4, 8, 5, 'Harry Potter and the Chamber of Secrets', '20.00', 'The third volume of Harry Potter.', '<p>You did not select a file to upload.</p>\r\n\r\n<p>You did not select a file to upload.</p>\r\n\r\n<p>You did not select a file to upload.</p>\r\n\r\n<p>You did not select a file to upload.</p>\r\n', '2017-10-24 00:29:02', 0),
+(1, 5, 3, 'Collared shirt', '25.00', 'White Shirt From Korea', '<ul>\r\n	<li>Cotton Shirt From Korea</li>\r\n	<li>Make of Silk</li>\r\n	<li>100% LEGIT</li>\r\n	<li>MAKE FROM COW SILK</li>\r\n	<li>Berdasarkan Sunnah</li>\r\n</ul>\r\n', '2017-10-23 15:18:20', 1),
+(2, 5, 5, 'Prisoner suit', '17.50', 'Striped shirt made of leather.', '', '2017-10-23 15:19:00', 0),
+(3, 8, 5, 'Harry Potter and the Sorcerer\'s stone', '20.00', 'The first volume of Harry Potter.', '', '2017-10-23 15:19:07', 0),
+(4, 8, 5, 'Harry Potter and the Chamber of Secrets', '20.00', 'The third volume of Harry Potter.', '', '2017-10-23 15:19:13', 0),
 (5, 6, 4, 'Harry Potter\'s Jeans', '15.00', 'Jean made for Harry Potter', '', '2017-10-23 15:19:21', 0),
 (6, 5, 4, 'Harry Potter t-shirt', '20.00', 't-shirt that was worn by Harry Potter', '', '2017-10-23 15:19:26', 0),
 (7, 16, 10, 'Sofa Ajaib', '50.00', 'Ini adalah sofa ajaib yang disayangi doraemon', '', '2017-10-23 15:19:33', 0),
-(8, 8, 10, 'Calendar Serbaguna', '7.00', 'Calendar Memutar Waktu', '<ul>\r\n	<li>7 Inchi Lebar</li>\r\n	<li>7 Inchi Tinggi</li>\r\n	<li>Sesuai untuk semua umur</li>\r\n	<li>Sesuai untuk penjaja yang suka berjaja</li>\r\n</ul>\r\n', '2017-10-23 15:20:38', 0),
-(14, 5, 10, 'Oracle People Soft Solution', '50.00', 'Oracle People Soft Solution is so good', '<ul>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n	<li>Oracle People Soft Solution is so good</li>\r\n</ul>\r\n', '2017-10-25 21:50:34', 0),
-(16, 12, 10, 'Karipap Hajah Kamariah Binti Abdullah', '5.00', 'Karipap Diperbuat Daripada Ubi', '<p>Karipap Diperbuat Daripada Ubi dan Daging Kari Yang Sedap Menarik</p>\r\n', '2017-10-23 17:29:30', 0),
-(19, 8, 10, 'Harry Potter First Book', '50.00', 'Harry Potter first book', '<p>Harry Potter first book</p>\r\n\r\n<p>Harry Potter first book</p>\r\n\r\n<p>Harry Potter first book</p>\r\n\r\n<p>Harry Potter first book</p>\r\n', '2017-10-24 00:37:40', 0),
-(20, 18, 10, 'Owl Bracelet From Memento Collection Collector\'s Edition', '15.00', 'Natural Lava Stone with Golden Bracelet', '<p>Natural Lava Stone with Golden Bracelet</p>\r\n\r\n<ul>\r\n	<li>Made From Natural Stone</li>\r\n	<li>Made From Lava</li>\r\n	<li>Lapis Lazuli</li>\r\n	<li>Healing Benefit</li>\r\n</ul>\r\n', '2017-10-24 01:34:23', 0);
+(8, 8, 10, 'Calendar Serbaguna', '7.00', 'Calendar Memutar Waktu', '<ul>\r\n	<li>7 Inchi Lebar</li>\r\n	<li>7 Inchi Tinggi</li>\r\n	<li>Sesuai untuk semua umur</li>\r\n	<li>Sesuai untuk penjaja yang suka berjaja</li>\r\n</ul>\r\n', '2017-10-23 15:20:38', 0);
 
 -- --------------------------------------------------------
 
@@ -477,17 +451,17 @@ ALTER TABLE `wishlist_table`
 -- AUTO_INCREMENT for table `address_table`
 --
 ALTER TABLE `address_table`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `category_table`
 --
 ALTER TABLE `category_table`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `history_table`
 --
@@ -502,17 +476,17 @@ ALTER TABLE `popular_table`
 -- AUTO_INCREMENT for table `product_cart_table`
 --
 ALTER TABLE `product_cart_table`
-  MODIFY `product_cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `product_cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `product_images_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `product_images_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product_table`
 --
 ALTER TABLE `product_table`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `rating_table`
 --
