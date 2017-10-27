@@ -23,7 +23,7 @@
 				</form>
 				<div class="text-center">
 					<a class="d-block small mt-3" href="<?php echo base_url('index.php/account/register');?>">Register an Account</a>
-					<a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+					<!-- <a class="d-block small" href="forgot-password.html">Forgot Password?</a> -->
 				</div>
 			</div>
 		</div>
