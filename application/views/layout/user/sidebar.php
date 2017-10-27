@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
+            <i class="fa fa-user"></i>
             <span class="nav-link-text">Manage Profile</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
@@ -27,18 +27,15 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#product" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Manage Products</span>
+            <i class="fa fa-shopping-cart"></i>
+            <span class="nav-link-text">Carts and Orders</span>
           </a>
           <ul class="sidenav-second-level collapse" id="product">
             <li>
               <a href="<?php echo site_url("user/your_cart");?>">Your Cart</a>
             </li>
             <li>
-              <a href="<?php echo site_url("user/active_products");?>">Active Products</a>
-            </li>
-            <li>
-              <a href="<?php echo site_url("user/promotions");?>">Promotions</a>
+              <a href="<?php echo site_url("user/your_order");?>">Your Order</a>
             </li>
           </ul>
         </li>

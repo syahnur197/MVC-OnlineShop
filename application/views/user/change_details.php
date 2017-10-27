@@ -6,7 +6,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+        <a href="<?= site_url('user/dashboard')?>">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Change Details</li>
       </ol>
@@ -35,25 +35,3 @@
 
     </div><!-- /.container-fluid-->  
   </div><!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Bootstrap core JavaScript-->
-0
-
-</body>
-
-</html>
-<script>
-$(".nospace").on("keydown", function (e) {
-    return e.which !== 32;
-});
-</script>

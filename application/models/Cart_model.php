@@ -49,6 +49,18 @@ class Cart_model extends CI_Model {
     }
 
     /**
+        Get all user orders in db
+
+        @return PHP Object of all cart
+    **/
+    
+    public function getAllUserOrders() {
+        return $this->db
+            ->join("user_table ut", "ut.user_id = ct.user_id")
+            ->get_where("cart_table ct", array("flag" => 1, "ct.user_id" => $this->session->userdata('userid')));
+    }
+
+    /**
         Get the user current active cart
 
         @param int $user_id
@@ -157,7 +169,9 @@ class Cart_model extends CI_Model {
     public function getProductsInCart($cart_id) {
         return $this->db
             ->join("product_table pt", "pt.product_id = pct.product_id")
-            ->get_where("product_cart_table pct", array("cart_id" => $cart_id))
+            ->join('product_images pi', 'pi.product_id = pt.product_id')
+            ->join('cart_table ct', 'ct.cart_id = pct.cart_id')
+            ->get_where("product_cart_table pct", array("pct.cart_id" => $cart_id))
             ->result();
     }
 
@@ -186,6 +200,15 @@ class Cart_model extends CI_Model {
 
     public function removeFromCart($pcid) {
         return $this->db->where('product_cart_id', $pcid)->delete(PRODUCTCART);
+    }
+
+    public function userCartChecking($cartid) {
+        $count = $this->db->get_where('cart_table', array('cart_id' => $cartid, "user_id" => $this->session->userdata('userid')))->num_rows();
+        if ($count == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 ?>

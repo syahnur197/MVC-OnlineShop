@@ -31,6 +31,18 @@ class User_model extends CI_Model {
 		}
 
 	}
+
+	public function get_shipping_address($userid) {
+		return $this->db->get_where('address_table', array('user_id' => $userid));
+	}
+
+	public function add_shipping_address($data) {
+		return $this->db->insert('address_table', $data);
+	}
+
+	public function update_shipping_address($data, $user_id) {
+		return $this->db->where(array("user_id" => $user_id))->update('address_table', $data);
+	}
 }
 
 ?>

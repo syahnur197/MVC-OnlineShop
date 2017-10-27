@@ -1,4 +1,4 @@
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <div class="container-fluid">
       <?php echo $this->session->flashdata("msg"); ?>
       <!-- Breadcrumbs-->
@@ -6,27 +6,26 @@
         <li class="breadcrumb-item">
           <a href="<?= site_url('user/dashboard');?>">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Your cart</li>
+        <li class="breadcrumb-item">
+          <a href="<?= site_url('user/your_order');?>">Order Listing</a>
+        </li>
+        <li class="breadcrumb-item active">Your Order</li>
       </ol>
       <!-- Active Cart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-shopping-cart"> </i> Your Cart</div>
+          <i class="fa fa-shopping-cart"> </i> Your Order</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table" id="dataTable" width="100%" cellspacing="0">
               <tbody>
-                <?php 
-                  if ($exist):
-                  $count = 1;
-                ?>
+                <?php $count = 1; ?>
                   <thead>
                     <th>No</th>
                     <th>Product Image</th>
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Option</th>
                   </thead>
                   <?php foreach($cartData as $cart): ?>
                   <tr align="center">
@@ -47,9 +46,6 @@
                     <td rowspan=1 align="left" >
                       Price : $ <?= number_format ( $cart->price * $cart->quantity, 2 );?>
                     </td>
-                    <td rowspan=2>
-                      <button data-toggle="modal" data-target="#cartmodal" class="btn-sm btn-danger passID" data-id="<?= $cart->product_cart_id; ?>"> x </button>
-                    </td>
                   </tr><tr>
                     <td rowspan=1 colspan=3 align="left"><?= $cart->short_desc; ?></td>
                   </tr>
@@ -57,19 +53,12 @@
                   endforeach;
                 ?>
                 <tr><td colspan=3></td><th colspan=1>Total Price :</th><th colspan='2'> $ <?= number_format( $totalPrice, 2); ?></th></tr>
-                <?php else: ?>
-                <tr align="center"><td>Your cart is empty.</td></tr>
-                 <?php endif; ?>
+                <tr><td colspan=3></td><th colspan=1>Date Bought :</th><th colspan='2'>
+                    <?= date_format(date_create($cart->date_buy), "d M Y"); ?>
+                </th></tr>
               </tbody>
             </table>
           </div>
-          <?php if($exist):?>
-          <a href="<?= site_url('user/checkout')?>">
-            <button class="btn btn-primary">
-              Check Out
-            </button>
-          </a>
-          <?php endif; ?>
         </div>
       </div>
     </div>

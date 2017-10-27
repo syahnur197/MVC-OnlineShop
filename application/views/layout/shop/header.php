@@ -25,6 +25,7 @@
 			function addToCart(product_id) {
 				var quantity = "#quantity_"+product_id;
 				quantity = $(quantity).val();
+				// alert(product_id);
 				// alert(quantity);
 				if (quantity == "") {
 						$("#alert_modal").modal("show");
@@ -35,17 +36,20 @@
 				} else {
 					$.post("<?= site_url('cart/addToCart'); ?>", {"quantity":quantity, "product_id":product_id},
 						function(data) {
+							console.log(data);
 							$("#alert_modal").modal("show");
 							$("#modal_body").html(data.message);
 							$("#modal_title").html(data.title);
 							if (data.success == true) {
-								var footer = "<button type='button' class='btn btn-success' data-dismiss='modal'>Checkout</button>";
+								var footer = "<a href='<?= site_url('user/your_cart');?>'>";
+								footer += "<button type='button' class='btn btn-success'>Checkout</button>";
+								footer += "</a>";
 								footer += "<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>";
 							} else {
 								var footer = "<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>";
 							}
 							$("#modal_footer").html(footer);
-						}
+						}, 'json'
 					)
 				}
 			}

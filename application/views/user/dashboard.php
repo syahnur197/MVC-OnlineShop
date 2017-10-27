@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>User Dashboard</title>
-  <!-- Bootstrap core CSS-->
-  <link href="<?php echo base_url();?>style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <!-- Page level plugin CSS-->
-  <link href="<?php echo base_url();?>style/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="<?php echo base_url();?>style/css/sb-admin.css" rel="stylesheet">
-</head>
-
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <!-- <?php include("sidebar.php"); ?> -->
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
+        <li class="breadcrumb-item active">Dashboard</li>
       </ol>
       <!-- Icon Cards-->
       <div class="row">
@@ -438,35 +413,3 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <?php include("logout.php"); ?>
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url();?>style/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo base_url();?>style/vendor/popper/popper.min.js"></script>
-    <script src="<?php echo base_url();?>style/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url();?>style/js/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="<?php echo base_url();?>style/vendor/chart.js/Chart.min.js"></script>
-    <script src="<?php echo base_url();?>style/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="<?php echo base_url();?>style/vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url();?>style/js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="<?php echo base_url();?>style/js/sb-admin-datatables.min.js"></script>
-    <script src="<?php echo base_url();?>style/js/sb-admin-charts.min.js"></script>
-  </div>
-</body>
-
-</html>
