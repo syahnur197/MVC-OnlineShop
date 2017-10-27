@@ -39,6 +39,7 @@
               </tbody>
             </table>
           </div>
+          <button class="btn btn-primary">Check Out</button>
         </div>
       </div>
     </div>
