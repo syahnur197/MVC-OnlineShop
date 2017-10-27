@@ -66,10 +66,8 @@
 			if ($cartExist) {
 				$cartid = $this->cart_model->getUserActiveCartID();
 				$data['cartData'] = $this->cart_model->getProductsInCart($cartid);
-				$data['exist'] = true;
-			} else {
-				$data['exist'] = false; 
 			}
+			$data['exist'] = $cartExist;
 
 			$this->load->view('layout/account/header', array('title' => 'User Dashboard'));
 			$this->load->view('layout/dashboard/usersidebar');

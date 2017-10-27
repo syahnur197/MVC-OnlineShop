@@ -69,8 +69,13 @@ class Cart_model extends CI_Model {
         @return bool, TRUE if user has active cart
     **/
 
+    public function getUserActiveCart() {
+        $user_id = $this->session->userdata('userid');
+        return $cart = $this->db->get_where('cart_table', array("user_id" => $user_id, "flag" => 0))->row();
+    }
+
     public function hasActiveCart() {
-        $cart = $this->getUserActiveCartID();
+        $cart = $this->getUserActiveCart();
         if (count($cart) != 0) {
             return TRUE;
         } else {

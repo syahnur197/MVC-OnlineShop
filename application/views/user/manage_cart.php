@@ -15,22 +15,6 @@
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-<!--               <thead>
-                <tr>
-                  <th width='20px'>No</th>
-                  <th>Image</th>
-                  <th>Product Detail</th>
-                  <th>Options</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th width='20px'>No</th>
-                  <th>Image</th>
-                  <th>Product Detail</th>
-                  <th>Options</th>
-                </tr>
-              </tfoot> -->
               <tbody>
                 <?php 
                   if ($exist) :
