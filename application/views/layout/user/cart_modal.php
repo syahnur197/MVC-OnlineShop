@@ -18,13 +18,3 @@
         </div>
       </div>
     </div>
-
-    <script>
-    //triggered when modal is about to be shown
-    $('#cartmodal').on('show.bs.modal', function(e) {
-        //get data-id attribute of the clicked element
-        var product_cart_id = $(e.relatedTarget).data('id');
-        //populate the textbox
-        $(e.currentTarget).find('input[name="productCartId"]').val(product_cart_id);
-    });
-    </script>
