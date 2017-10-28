@@ -88,19 +88,13 @@
 		
 		public function checkout() {
 			$this->gate_model->user_gate();
-			$products = $this->cart_model->getProductsInCart($cartid);
-			$count = count($products);
-			if($count == 0){
-				$message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> You have No products in your cart. </div>'; 
+			$cartid = $this->cart_model->getUserActiveCartID();
+			$cartData = $data['cartData'] = $this->cart_model->getProductsInCart($cartid);
+			if (count($cartData) == 0) {
+				$message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> You have no products in your cart. Cannot proceed to checkout </div>'; 
 				$this->session->set_flashdata('msg', $message);
 				redirect('user/your_cart');
 			} else {
-				$cartExist = $this->cart_model->hasActiveCart();
-				if ($cartExist) {
-					$cartid = $this->cart_model->getUserActiveCartID();
-					$cartData = $data['cartData'] = $this->cart_model->getProductsInCart($cartid);
-				}
-				$data['exist'] = $cartExist;
 				$data['totalPrice'] = 0;
 				foreach($cartData as $cart) {
 					$data['totalPrice'] += $cart->price * $cart->quantity;
