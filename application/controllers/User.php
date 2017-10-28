@@ -88,35 +88,43 @@
 		
 		public function checkout() {
 			$this->gate_model->user_gate();
-			$cartExist = $this->cart_model->hasActiveCart();
-			if ($cartExist) {
-				$cartid = $this->cart_model->getUserActiveCartID();
-				$cartData = $data['cartData'] = $this->cart_model->getProductsInCart($cartid);
+			$products = $this->cart_model->getProductsInCart($cartid);
+			$count = count($products);
+			if($count == 0){
+				$message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> You have No products in your cart. </div>'; 
+				$this->session->set_flashdata('msg', $message);
+				redirect('user/your_cart');
+			} else {
+				$cartExist = $this->cart_model->hasActiveCart();
+				if ($cartExist) {
+					$cartid = $this->cart_model->getUserActiveCartID();
+					$cartData = $data['cartData'] = $this->cart_model->getProductsInCart($cartid);
+				}
+				$data['exist'] = $cartExist;
+				$data['totalPrice'] = 0;
+				foreach($cartData as $cart) {
+					$data['totalPrice'] += $cart->price * $cart->quantity;
+				}
+				
+				$data['user'] = $this->user_model->get_userdetail($this->session->userdata('userid'))->row();
+				$shipping = $data['shipping_address'] = $this->user_model->get_shipping_address($this->session->userdata('userid'))->row_array();
+				if (count($shipping) == 0) {
+					$data['shipping_address'] = array(
+						"address_id" => "",
+						"user_id" => "",
+						"country" => "",
+						"postcode" => "",
+						"address" => "",
+						"town" => "",
+					);
+				}
+		
+				$this->load->view('layout/user/header', array('title' => 'Checkout'));
+				$this->loadUserSidebar('show_cart_order', 'your_cart_active');
+				$this->load->view('user/checkout', $data);
+				$this->load->view('layout/dashboard/logout');
+				$this->load->view('layout/user/footer');
 			}
-			$data['exist'] = $cartExist;
-			$data['totalPrice'] = 0;
-			foreach($cartData as $cart) {
-				$data['totalPrice'] += $cart->price * $cart->quantity;
-			}
-			
-			$data['user'] = $this->user_model->get_userdetail($this->session->userdata('userid'))->row();
-			$shipping = $data['shipping_address'] = $this->user_model->get_shipping_address($this->session->userdata('userid'))->row_array();
-			if (count($shipping) == 0) {
-				$data['shipping_address'] = array(
-					"address_id" => "",
-					"user_id" => "",
-					"country" => "",
-					"postcode" => "",
-					"address" => "",
-					"town" => "",
-				);
-			}
-	
-			$this->load->view('layout/user/header', array('title' => 'Checkout'));
-			$this->loadUserSidebar('show_cart_order', 'your_cart_active');
-			$this->load->view('user/checkout', $data);
-			$this->load->view('layout/dashboard/logout');
-			$this->load->view('layout/user/footer');
 			
 		}
 		

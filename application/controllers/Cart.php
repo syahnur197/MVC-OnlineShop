@@ -76,10 +76,18 @@ class CART extends CI_Controller {
             $this->user_model->add_shipping_address($data);
         }
         $cartid = $this->cart_model->getUserActiveCartID();
-        $this->cart_model->buyCart($cartid);
-        $message = '<div class="alert alert-success" style="margin-top:10px" role="alert"> You have purchased your cart. </div>'; 
-        $this->session->set_flashdata('msg', $message);
-        redirect('user/your_cart');
+        $products = $this->cart_model->getProductsInCart($cartid);
+        $count = count($products);
+        if ($count == 0) {
+            $message = '<div class="alert alert-danger" style="margin-top:10px" role="alert"> You have No products in your cart. </div>'; 
+            $this->session->set_flashdata('msg', $message);
+            redirect('user/your_cart');
+        } else {
+            $this->cart_model->buyCart($cartid);
+            $message = '<div class="alert alert-success" style="margin-top:10px" role="alert"> You have purchased your cart. </div>'; 
+            $this->session->set_flashdata('msg', $message);
+            redirect('user/your_cart');
+        }
     }
 
 }
