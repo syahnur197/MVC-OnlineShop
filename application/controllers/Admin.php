@@ -8,13 +8,27 @@ class Admin extends My_Controller {
 		$this->load->model('product_model');
 		$this->load->model('category_model');
 		$this->load->model('cart_model');
+		$this->load->model('contact_model');
+		$this->load->model('user_model');
 	}
-
+	
 	public function index()	{
 		$this->gate_model->admin_gate();
+		$data['newMessagesCount'] = $this->contact_model->getNewMessagesCount();
+		$data['messages'] = $this->contact_model->getMessages();
 		$this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
 		$this->loadSidebar(null, null);
-		$this->load->view('admin/dashboard');
+		$this->load->view('admin/dashboard', $data);
+		$this->load->view('layout/dashboard/footer');
+	}
+	
+	public function read_message($message_id) {
+		$this->gate_model->admin_gate();
+		$this->contact_model->readMessage($message_id);
+		$data['message'] = $this->contact_model->getMessage($message_id)->row();
+		$this->load->view('layout/dashboard/header', array('title' => 'Admin Dashboard'));
+		$this->loadSidebar(null, null);
+		$this->load->view('admin/read_message', $data);
 		$this->load->view('layout/dashboard/footer');
 	}
 	
@@ -167,6 +181,7 @@ class Admin extends My_Controller {
 		$data['cart'] = $this->cart_model->getCartDetail($cart_id);
 		$data['products'] = $this->cart_model->getProductsInCart($cart_id);
 		$data['totalPrice'] = $this->cart_model->getTotalCartPrice($cart_id);
+		$data['shippingAddress'] = $this->user_model->get_shipping_address($data['cart']->user_id)->row();
 		// header('Access-Control-Allow-Origin: *');
 		// header('Content-Type: application/json');
 		// echo json_encode($data);

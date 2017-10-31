@@ -9,23 +9,25 @@
 			<ul class="list-group">
 				<?php foreach( $categoryData as $category ): ?>
 					<li class="list-group-item">
-						<a data-toggle="collapse" href="#<?= $category->category_name; ?>SubListGroup">
-							<span><?= $category->category_name; ?></span>
-							<?php if(count($category->subCategory) != 0): ?>
-								<i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
-							<?php endif; ?>
+						<a data-toggle="collapse" href="#<?= $category->category_id; ?>SubListGroup">
+							<div>
+								<?= $category->category_name; ?>
+								<?php if(count($category->subCategory) != 0): ?>
+									<i class="fa fa-chevron-right pull-right" aria-hidden="true"></i>
+								<?php endif; ?>
+							</div>
 						</a>
-						<div id="<?= $category->category_name; ?>SubListGroup" class="panel-collapse collapse">
+						<div id="<?= $category->category_id; ?>SubListGroup" class="panel-collapse collapse">
 							<ul class="list-unstyled">
 								<?php 
 									foreach( $category->subCategory as $subCat ): 
 								?>
 									<li class="list-group-item" style="border: none;">
-										<span>
+										<div>
 											<a href="#<?= $subCat->category_id; ?>" onclick="selectCategory(<?= $subCat->category_id; ?>, '<?= $subCat->category_name; ?>')">
 												<?= $subCat->category_name; ?>
 											</a>
-										</span>
+										</div>
 									</li>
 								<?php endforeach; ?>
 							</ul>
@@ -64,7 +66,7 @@
 							<img class="d-block img-fluid" src="<?= base_url('style/assets/images/headline/top-brand.jpg')?>" alt="First slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="<?= base_url('style/assets/images/headline/watch.jpg')?>" alt="Second slide">
+							<img class="d-block img-fluid" src="<?= base_url('style/assets/images/headline/fab.png')?>" alt="Second slide">
 						</div>
 						<div class="carousel-item">
 							<img class="d-block img-fluid" src="<?= base_url('style/assets/images/headline/projector.png')?>"alt="Third slide">
@@ -115,9 +117,9 @@
 						</div>
 					</div>
 					<?php endforeach; ?>
-
 				</div>
 				<!-- /.row -->
+			<?= $link; ?>
 			</div>
 
 		</div>

@@ -13,7 +13,7 @@
       <!-- Active Cart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Cart</div>
+          <i class="fa fa-shopping-cart"></i> Cart</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">

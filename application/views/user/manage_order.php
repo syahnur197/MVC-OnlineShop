@@ -11,7 +11,7 @@
       <!-- Ordered Cart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Orders</div>
+          <i class="fa fa-shopping-cart"></i> Orders</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -36,7 +36,7 @@
                   <tr align="center">
                     <td><?= $count++;?></td>
                     <td>$ <?= number_format ( $order->totalPrice, 2  );  ?></td>
-                    <td><?= date_format(date_create($order->date_buy), "d M Y"); ?></td>
+                    <td><?= date_format(date_create($order->date_buy), "d M Y H:i"); ?></td>
                     <td><a href="<?= site_url('user/view_order/'.$order->cart_id)?>">View Order</a></td>
                   </tr>
                 <?php endforeach; ?>

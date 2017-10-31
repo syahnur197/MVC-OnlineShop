@@ -11,7 +11,7 @@
     <!-- View Categpory DataTables Card-->
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table"></i> Category List </div>
+        <i class="fa fa-tags"></i> Category List </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

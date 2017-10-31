@@ -24,7 +24,7 @@ class Product_model extends CI_Model {
 	/**
         Get data of product
 
-        @param int $product_id (DEFAULT = "")
+        @param int $product_id
 
         @return PHP Object of product data
     **/
@@ -74,9 +74,9 @@ class Product_model extends CI_Model {
 	}
 
 	/**
-        Add product
+        Add product and insert image
 
-        @param arr 
+        @param arr, String $image_link
 
         @return void
     **/
@@ -89,9 +89,9 @@ class Product_model extends CI_Model {
 	}
 
 	/**
-        Update product data
+        Update product data with product image
 
-        @param int $product_id (DEFAULT = ""), arr $array
+        @param int $product_id (DEFAULT = ""), arr $array, String $image_link
 
         @return void
     **/
@@ -108,6 +108,14 @@ class Product_model extends CI_Model {
 		}
 		return $update;
 	}
+
+	/**
+        Update product
+
+        @param int $product_id (DEFAULT = ""), arr $array, String $image_link
+
+        @return void
+    **/
 	
 	public function updateProduct($product_id, $array) {
 		return $this->db->where("product_id", $product_id)->update(PRODUCT, $array);
@@ -154,9 +162,9 @@ class Product_model extends CI_Model {
 	*/
 
 	/**
-        deactivate product
+        Change product staus
 
-        @param int $product_id (DEFAULT = "")
+        @param int $product_id, int $active_flag
 
         @return void
 	**/
@@ -165,16 +173,38 @@ class Product_model extends CI_Model {
 		return $this->db->where('product_id', $product_id)->update(PRODUCT, array('active_flag' => $active_flag));
 	}
 
+	/** 
+		Get the product name
+
+		@param int $product_id
+
+		@return String product_name
+	*/
+	
 	public function getProductName ($product_id) {
 		return $this->db->where('product_id', $product_id)->get('product_table')->row()->product_name;
 	}
+	
+	/** 
+		Get all active products
 
+		@return PHP Object of all active products
+	*/
+	
 	public function getActiveProduct() {
 		return $this->db
 		->join('product_images pi', 'pi.product_id = pt.product_id')
 		->get_where('product_table pt', array('pt.active_flag' => 0))->result();
 	}
+	
+	/** 
+		Get the image link of the product
 
+		@param int $product_id
+
+		@return String of image_link
+	*/
+	
 	public function getProductImageLink($product_id) {
 		$image = $this->db->get_where('product_images', array('product_id' => $product_id))->row();
 		if (count($image) != 0) {
@@ -184,6 +214,14 @@ class Product_model extends CI_Model {
 		}
 	}
 	
+	/** 
+		Get the product image id
+
+		@param int $product_id
+
+		@return int product_image_id
+	*/
+	
 	public function getProductImageId($product_id) {
 		$image = $this->db->get_where('product_images', array('product_id' => $product_id))->row();
 		if (count($image) != 0) {
@@ -192,6 +230,60 @@ class Product_model extends CI_Model {
 			return false;
 		}
 	}
- 	
+	
+	/** 
+		Get all of product review
+
+		@param int $product_id
+
+		@return PHP Object of product review
+	*/
+	
+	public function getProductReview($product_id) {
+		return $this->db
+		->join('user_table ut', 'ut.user_id=rt.user_id')
+		->get_where('review_table rt', array('product_id' => $product_id))->result();
+	}
+	
+	/** 
+		Add review to a product
+
+		@param arr $data
+
+		@return boolean
+	*/
+	
+	public function addProductReview($data) {
+		return $this->db->insert('review_table', $data);
+	}
+	
+	/** 
+		Get product count
+
+		@return int
+	*/
+	
+	public function getProductCount() {
+		return $this->db->count_all('product_table');
+	}
+
+	/** 
+		Get specific amount of product
+
+		@param int @limit int $start
+
+		@return PHP Object
+	*/
+
+ 	public function getLimitProducts($limit, $start) {
+		$query = $this->db->limit($limit, $start)
+			->join('product_images pi', 'pi.product_id = pt.product_id')
+			->get_where('product_table pt', array('pt.active_flag' => 0));
+		if($query->num_rows() > 0) {
+			 return $query->result();
+		} else {
+			 return false;
+		}
+	 }
 }
 ?>

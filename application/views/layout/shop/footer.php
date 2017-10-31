@@ -22,7 +22,7 @@
 		<!-- Footer -->
 		<footer class="py-5 mt-5 bg-dark">
 			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; eShop Sdn. Bhd. 2017</p>
+				<p class="m-0 text-center text-white">Copyright &copy; Awesome eStore 2017</p>
 			</div>
 			<!-- /.container -->
 		</footer>

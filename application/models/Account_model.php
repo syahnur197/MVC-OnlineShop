@@ -37,11 +37,5 @@ class Account_model extends CI_Model {
 	public function register($data) {
 		return $this->db->insert(USER, $data);
 	}
-
-	/**
-        Bounce un-logged in users of user dashboard
-	**/
-	public function userGate () {}
-
 }
 ?>

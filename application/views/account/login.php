@@ -2,7 +2,7 @@
 	<div class="container">
 		<?php echo $this->session->flashdata("fail"); ?>
 		<h1  class="text-center mt-5" style="color:white; font-family: 'Lobster', cursive">LOGIN</h1>
-		<div class="card card-login mx-auto">
+		<div class="card card-login mx-auto mt-2">
 			<div class="card-body">
 				<?php echo form_open('account/loggingIn'); ?>
 					<div class="form-group">

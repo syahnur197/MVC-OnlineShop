@@ -1,8 +1,8 @@
-<body class="bg-dark">
+<body style="min-height: 350px; background:linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url(<?= base_url('style/assets/images/mall.jpeg')?>) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover;">  
   <div class="container">
     <?php echo $this->session->flashdata("register"); ?>
-    <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register an Account</div>
+    <h1  class="text-center mt-5" style="color:white; font-family: 'Lobster', cursive">Register</h1>
+    <div class="card card-register mx-auto mt-2">
       <div class="card-body">
         <?php echo validation_errors(); ?>
         <?php echo form_open('Account/registerAccount'); ?>
@@ -46,7 +46,7 @@
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="<?php echo base_url('index.php/account');?>">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <!-- <a class="d-block small" href="forgot-password.html">Forgot Password?</a> -->
         </div>
       </div>
     </div>

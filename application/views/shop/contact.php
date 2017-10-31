@@ -3,13 +3,22 @@
 </div>
 
 <div class="container">
-	<p>Feeling entitled? Got any complaints? Send it to us so we can provide you the attention you seek for. We truly care about your little feelings</p>
+	<?= $this->session->flashdata('message');?>
+	<?= form_open('shop/addContact');?>
+	<p>Got something to share with us? Send us a message!</p>
+	
+	<?php echo form_error('full_name'); ?>
 	<label>Full Name</label>
-	<input type="text" class="form-control"/>
+	<input type="text" class="form-control" name="full_name" value="<?= set_value('full_name'); ?>"/>
+	
+	<?php echo form_error('e-mail'); ?>
 	<label>Email</label>
-	<input type="email" class="form-control"/>
-	<label>Full Name</label>
-	<textarea class="form-control"></textarea>
+	<input type="email" class="form-control" name="e-mail" value="<?= set_value('e-mail'); ?>"/>
+	
+	<?php echo form_error('message'); ?>
+	<label>Message</label>
+	<textarea class="form-control" name="message"><?= set_value('message'); ?></textarea>
 	<br>
-	<input type="submit" value="Complain" class="btn btn-primary form-control"/>
+	<input type="submit" value="Submit" class="btn btn-primary form-control"/>
+	<?= form_close(); ?>
 </div>

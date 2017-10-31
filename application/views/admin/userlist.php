@@ -13,13 +13,13 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-users"></i> Users list</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>No</th>
                   <th>Username</th>
                   <th>First Name</th>
                   <th>Last Name</th>
@@ -27,20 +27,10 @@
                   <th>Options</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Options</th>
-                </tr>
-              </tfoot>
               <tbody>
-                <?php foreach($userlist->result() as $ul) : ?>
+                <?php $count = 1; foreach($userlist->result() as $ul) : ?>
                   <tr>
-                    <td><?= $ul->user_id ?></td>
+                    <td><?= $count++; ?></td>
                     <td><?= $ul->username ?></td>
                     <td><?= $ul->first_name ?></td>
                     <td><?= $ul->last_name ?></td>

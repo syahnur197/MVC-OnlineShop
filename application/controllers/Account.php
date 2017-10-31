@@ -34,26 +34,52 @@ class Account extends CI_Controller {
     **/
 	public function registerAccount() {
 		$this->form_validation->set_rules(
+			'FName', 'First Name',
+			'trim|required|min_length[5]|max_length[20]|alpha',
+			array(
+				'required' => 'You have not provided %s.',
+				'min_length' => 'Your {field} needs to be at least {param} characters long',
+				'max_length' => 'Your {field} needs to be at most {param} characters long',
+				'alpha' => 'You may only use alphabet in your {field}'
+			)
+		);
+
+		$this->form_validation->set_rules(
+			'LName', 'Last Name',
+			'trim|required|min_length[5]|max_length[20]|alpha',
+			array(
+				'required' => 'You have not provided %s.',
+				'min_length' => 'Your {field} needs to be at least {param} characters long',
+				'max_length' => 'Your {field} needs to be at most {param} characters long',
+				'alpha' => 'You may only use alphabet in your {field}'
+			)
+		);
+
+		$this->form_validation->set_rules(
 			'username', 'Username',
-			'required|min_length[5]|max_length[12]|is_unique[user_table.username]',
+			'trim|required|min_length[5]|max_length[12]|is_unique[user_table.username]|alpha',
 			array(
 				'required' => 'You have not provided %s.',
-				'is_unique' => 'This %s already exists.'
+				'is_unique' => 'This %s already exists.',
+				'alpha' => 'You may only use alphabet and numbers for your username'
 			)
 		);
 
-		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[user_table.email]', 
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[user_table.email]|valid_email', 
 			array(
 				'required' => 'You have not provided %s.',
-				'is_unique' => 'This %s already exists.'
+				'is_unique' => 'This %s already exists.',
+				'valid_email' => 'You did not provide a valid E-Mail Address'
 			)
 		);
 
-		$this->form_validation->set_rules('password', 'Password', 'required',
-			array('required' => 'You must provide a %s.')
+		$this->form_validation->set_rules('password', 'Password', 'trim|required',
+			array(
+				'required' => 'You must provide a %s.'
+			)
 		);
 
-		$this->form_validation->set_rules('confPassword', 'Password Confirmation', 'required|matches[password]',
+		$this->form_validation->set_rules('confPassword', 'Password Confirmation', 'trim|required|matches[password]',
 			array('required' => 'You must provide a %s.')
 		);
 
@@ -109,7 +135,7 @@ class Account extends CI_Controller {
 			redirect('Admin');
 		} else if ($result == "ban") {
 			$this->session->set_flashdata('success', '<div class="alert alert-danger mt-4" role="alert">
-  				You are banned from this website. Probably because you have been doing naughty stuff</div>'); 
+  				You are banned from this website.</div>'); 
 			redirect('shop');
 		} else {
 			$this->session->set_flashdata('fail', '<div class="alert alert-danger mt-4" role="alert">

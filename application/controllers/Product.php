@@ -265,6 +265,34 @@ class Product extends My_Controller {
 		$this->session->set_flashdata('msg', $message); 
 		redirect('admin/view_product');
 	}
+	
+	public function addReview() {
+		$product_id = $data['product_id'] = $this->input->post('product_id');
+		if ($this->session->userdata('usertype') != 'user') {
+			$message = "<div class='alert alert-danger alert-dismissable mt-2'>";
+			$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+			$message .= "<strong>Fail!</strong> You are not a valid user and are not allowed to leave a review";
+			$message .= "</div>";
+		} else {
+			$data['user_id'] = $this->session->userdata('userid');
+			$data['review'] = $this->input->post('review');
+			$data['post_time'] = date("Y-m-d h:i:sa");
+			$insert = $this->product_model->addProductReview($data);
+			if ($insert) {
+				$message = "<div class='alert alert-success alert-dismissable mt-2'>";
+				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+				$message .= "<strong>Success!</strong> Add a review successfully!";
+				$message .= "</div>";
+			} else {
+				$message = "<div class='alert alert-danger alert-dismissable mt-2'>";
+				$message .= "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>";
+				$message .= "<strong>Fail!</strong> Fail to add a review";
+				$message .= "</div>";
+			}
+		}
+		$this->session->set_flashdata('msg', $message); 
+		redirect("shop/product/$product_id");
+	}
 
 }
 ?>

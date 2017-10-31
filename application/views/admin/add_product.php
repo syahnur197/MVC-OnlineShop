@@ -6,9 +6,6 @@
       <li class="breadcrumb-item">
         <a href="<?= site_url('admin');?>">Dashboard</a>
       </li>
-      <li class="breadcrumb-item">
-        <a href="<?= site_url('admin/view_product');?>">View Product</a>
-      </li>
       <li class="breadcrumb-item active">Add Product</li>
     </ol>
     <!-- Example DataTables Card-->

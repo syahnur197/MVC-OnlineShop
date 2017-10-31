@@ -6,6 +6,7 @@
 
 body {
     padding-top: 54px;
+    font-family: Lora,'Times New Roman',serif !important;
 }
 
 @media (min-width: 992px) {

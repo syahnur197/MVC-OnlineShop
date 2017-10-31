@@ -22,11 +22,11 @@
           </div>
           <div class="form-group">
             <label for="dispname">Username</label>
-            <input class="form-control nospace" id="username" name="username" type="text" aria-describedby="emailHelp" placeholder="Username" value="<?= $userData->username; ?>">
+            <input class="form-control" id="username" name="username" type="text" aria-describedby="emailHelp" placeholder="Username" value="<?= $userData->username; ?>">
           </div>
             <div class="form-group">
             <label for="email">Email Address</label>
-            <input class="form-control nospace" id="email" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $userData->email; ?>">
+            <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $userData->email; ?>">
           </div>
           <button class="btn btn-primary btn-block" type="submit" >Update</button>
         <?=form_close();?>

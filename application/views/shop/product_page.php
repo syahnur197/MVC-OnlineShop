@@ -1,8 +1,8 @@
 		<!-- Page Content -->
 		<div class="container">
 
+			<?= $this->session->flashdata('msg');?>
 			<div class="row">
-
 				<div class="col-lg-4">
 					<img class="card-img-top img-fluid my-5" src="<?= base_url($product->image_link); ?>" alt="" >
 				</div>
@@ -36,24 +36,25 @@
 					</div>
 					<!-- /.card -->
 
-					<!-- <div class="card card-outline-secondary my-4">
+					<div class="card card-outline-secondary my-4">
 						<div class="card-header">
 							Product Reviews
 						</div>
 						<div class="card-body">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-							<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-							<hr>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-							<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-							<hr>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-							<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-							<hr>
-							<a href="#" class="btn btn-success">Leave a Review</a>
+							<?php foreach($reviews as $review):?>
+								<p><?= $review->review; ?></p>
+								<small class="text-muted">Posted by <?= $review->username; ?> on <?= date_format(date_create($review->post_time), "d M Y");?></small>
+								<hr>
+							<?php endforeach; ?>
+							<?= form_open('product/addReview'); ?>
+								<input type="hidden" name="product_id" value="<?= $product_id; ?>"/>
+								<textarea id="textarea" class="form-control" name="review" <?= $disabled; ?>></textarea>
+								<br>
+								<button type="submit" class="btn btn-success" <?= $disabled; ?>>Leave a Review</button>
+							<?= form_close(); ?>
 						</div>
-					</div> -->
-					<!-- /.card -->
+					</div>
+					<!-- /.card-->
 
 				</div>
 				<!-- /.col-lg-9 -->
