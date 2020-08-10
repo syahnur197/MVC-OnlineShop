@@ -12,11 +12,11 @@ Steps to install this website
 
 ## Website login credential
 ### *Admin*  
-* **username:** syahnur197  
+* **username:** admin  
 * **password:** 12345678
 
 ### *User*  
-* **username:** syahnur  
+* **username:** syahnur197  
 * **password:** 12345678
 
 ## Working features
