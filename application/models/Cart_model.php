@@ -93,13 +93,9 @@ class Cart_model extends CI_Model {
     **/
 
 
-    public function hasActiveCart() {
-        $cart = $this->getUserActiveCart();
-        if (count($cart) != 0) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+    public function hasActiveCart() 
+    {
+        return count($this->getUserActiveCart()) > 0;
     }
 
     /**
@@ -240,4 +236,3 @@ class Cart_model extends CI_Model {
         }
     }
 }
-?>
